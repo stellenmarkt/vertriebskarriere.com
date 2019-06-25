@@ -1,0 +1,24 @@
+<?php
+/**
+ * YAWIK
+ *
+ * @filesource
+ * @license MIT
+ * @copyright  2013 - 2018 Cross Solution <http://cross-solution.de>
+ */
+
+$form = $this->element;
+$this->headScript()->appendFile($this->basePath('modules/JobsFrankfurt/js/create-single-job.js'));
+?>
+
+
+<?=$this->form()->openTag($form)?>
+<?=$this->formRow($form->get('title'), null, null, 'form-horizontal')?>
+<?=$this->formRow($form->get('locations'))?>
+<?=$this->formCollection()->render($form->get('details'), true);?>
+<?=$this->formCollection($form->get('invoiceAddress'))?>
+
+<div class="controls controls-row form-group"><div class="col-md-12 text-right">
+        <?=$this->formCollection($form->get('buttons'))?>
+    </div></div>
+<?=$this->form()->closeTag($form)?>

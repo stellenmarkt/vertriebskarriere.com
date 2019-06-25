@@ -1,0 +1,217 @@
+<?php
+/**
+ * Gastrojobs24
+ *
+ * General layout template file. Defines the general layout.
+ *
+ * @copyright (c) 2013 - 2016 Cross Solution (http://cross-solution.de)
+ * @license   Gastrojobs
+ */
+
+/* @var $options \Core\Options\ModuleOptions */
+$options = $this->services('Core/Options');
+$lang = $this->params('lang');
+
+// See: http://yawik.readthedocs.org/en/latest/modules/core/notifications.html
+
+$notifications = $this->partial('core/notifications');
+
+// set default page title
+
+$this->headTitle($this->translate('Gesundheeitsstellenmarkt.de'))->setSeparator(' | ')->setAutoEscape(false);
+
+// set default keywords
+
+$this->headMeta()->setCharset("utf-8");
+$this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0');
+
+$this->configHeadScript()->prependScript('var lang="' . $lang . '";'
+                                         . 'var basePath="' . $this->basePath() . '";');
+
+$this->headLink()->prependStylesheet($this->basePath() . '/modules/JobsFrankfurt/layout.css');
+$this->headLink()->prependStylesheet($this->basePath('dist/css/core.min.css'));
+$this->configHeadScript()->prependFile($this->basepath('dist/js/core.js'));
+$this->configHeadScript()->appendFile($this->basePath('modules/JobsFrankfurt/js/jquery.matchHeight.js'))->appendFile($this->basePath('modules/JobsFrankfurt/js/index.js'));
+
+$langScript = 'dist/locales/' . $lang . '.js';
+$this->configHeadScript()->appendFile($this->basePath($langScript));
+
+$this->headLink()->appendStylesheet($this->basePath('/modules/JobsFrankfurt/jssocials-1.4.0/dist/jssocials.css'));
+$this->headLink()->appendStylesheet($this->basePath('/modules/JobsFrankfurt/jssocials-1.4.0/dist/jssocials-theme-flat.css'));
+
+$this->configHeadScript()->appendScript('var lang="' . $this->params('lang') . '";'
+    . 'var basePath="' . $this->basePath() . '";');
+
+
+
+?>
+
+<?php echo $this->doctype(); ?>
+<html lang="<?php echo $this->params('lang') ?>">
+<head>
+    <?php echo $this->headTitle() ?>
+    <?php echo $this->headMeta() ?>
+    <?php echo $this->configHeadScript() ?>
+    <?php echo $this->headLink() ?>
+    <?php echo $this->headStyle() ?>
+    
+    <link type="text/css" href="/modules/JobsFrankfurt/fit.css" rel="stylesheet" media="screen">
+
+    <style>
+     @media (max-width: 768px){
+
+         .navbar-nav {
+    margin: 0;
+    width: 100%;
+}
+        .navbar-nav>li>a:hover {
+            color: #fff;
+           }
+
+           #main-navigation a:hover, #main-navigation .dropdown-menu>li>a:hover {
+             color: #fff!important;
+        }
+
+         #main-navigation ul li a.inverted:hover {
+
+             color: #000!important;
+         }
+
+        .navbar-collapse {
+
+          box-shadow: none!important;
+        }
+
+
+#main-navigation .dropdown-menu>li>a {
+    color: #000!important;
+}
+        .navbar-nav .open .dropdown-menu>li>a, .navbar-nav .open .dropdown-menu .dropdown-header {
+    padding: 8px 15px 8px 45px!important;
+}
+.nav>li {
+
+    border-bottom: 1px solid #ddd;
+}
+        }
+        #yk-login .nav .active a, #wizardcontainer-jobs-form-categoriescontainer .nav .active a, #wizardcontainer-jobs-form-job .nav .active a {color: #fff;}
+        #jobsbymail-subscribe-form .row {margin-bottom:10px;}
+        iframe {border:0}
+        #form-jobs-form-preview  .panel-body {padding: 0!important;}
+        #main-navigation ul li a.inverted {background-color:#fff;color:#243b84;}
+        #main-navigation ul li a.inverted:hover {color:#fff;}
+            .navbar-toggle {
+             border-color: #242424!important;
+            background-color: #243b84!important;
+            }
+
+            .navbar-toggle .icon-bar {
+                background-color: #ffffff;
+          }
+
+    </style>
+    <script>
+
+
+        (function( $ ) {
+	'use strict';
+
+    /**
+     * FAQs Toggles
+     */
+    $(function() {
+        $('.qe-toggle-title').click(function () {
+            var parent_toggle = $(this).closest('.qe-faq-toggle');
+            if ( parent_toggle.hasClass( 'active' ) ) {
+                $(this).find('i.fa').removeClass( 'fa-minus-circle' ).addClass( 'fa-plus-circle' );
+                parent_toggle.removeClass( 'active' ).find( '.qe-toggle-content' ).slideUp( 'fast' );
+            } else {
+                $(this).find('i.fa').removeClass( 'fa-plus-circle' ).addClass( 'fa-minus-circle' );
+                parent_toggle.addClass( 'active' ).find( '.qe-toggle-content' ).slideDown( 'fast' );
+            }
+        });
+    });
+
+    /**
+     * FAQs Filter
+     */
+    $(function() {
+        $('.qe-faqs-filter').click( function ( event ) {
+            event.preventDefault();
+            $(this).parents('li').addClass('active').siblings().removeClass('active');
+            var filterSelector = $(this).attr( 'data-filter' );
+            var allFAQs = $( '.qe-faq-toggle' );
+            if ( filterSelector == '*' ) {
+                allFAQs.show();
+            } else {
+                allFAQs.not( filterSelector ).hide().end().filter( filterSelector ).show();
+            }
+        });
+    });
+
+})( jQuery );
+    </script>
+
+</head>
+<body>
+<?php if (!$this->noHeader):?>
+    <header id="header" role="banner">
+          <div class="container navbar">
+		     <div class="row">
+               <div class="navbar-header">
+
+                 <button class="navbar-toggle collapsed" data-target="#main-navigation" data-toggle="collapse" type="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                    <a class="navbar-brand menu-logo headliner" href="/de">
+                        GESUNDHEITSSTELLENMARKT.de
+                    </a>
+                 </div>
+            <nav id="main-navigation" class="navbar-collapse collapse navbar-collapse" role="navigation">
+
+
+                <?= $this->loginInfo(array('lang' => $lang ));?>
+                <?= $this->navigation('Core/Navigation')
+                         ->setAcl($this->services('acl'))
+                         ->setRole($this->auth('role'))
+                         ->menu()
+                         ->setMaxDepth(0) // only show the top level entries
+                         ->renderPartial(null, 'main-navigation');
+//                         ->setUlClass('nav navbar-nav pull-right')//renderPartial(null, 'main-navigation')
+                ?>
+
+            </nav>
+            <!-- /main-navigation -->
+        </div>
+              <br>
+              <br>
+              <br>
+     </div>
+        <div id="formular">
+        </div>
+    </header>
+    <?php endif ?>
+ <style>
+
+     #content .navbar {
+
+         position:static!important;
+
+     }
+
+
+ </style>
+
+<main id="content" style="background-color:#f6f6f6;margin-bottom:0;padding-bottom:50px;min-height:65vh;padding-top:15px;position:relative;">
+<div class="container">
+        <?php echo $notifications?>
+         <?php echo $this->content;?>
+</div>
+</main>
+
+<?php if (!$this->noFooter): echo $this->partial("footer"); endif; ?>
+</body>
+</html>

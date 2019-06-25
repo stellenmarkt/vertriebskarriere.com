@@ -1,0 +1,64 @@
+{
+    "type": "yawik-module",
+    "name": "stellenmarkt/jobs-frankfurt-com",
+    "description": "Creates a nice Yawik skin used at https://www.jobs-frankfurt.com/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Carsten Bleek",
+            "email": "bleek@cross-solution.de"
+        },
+        {
+            "name": "Mathias Gelhausen",
+            "email": "gelhausen@cross-solution.de"
+        }
+    ],
+    "keywords": [
+        "yawik", "skin"
+    ],
+    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "require": {
+        "yawik/core": "^0.33",
+        "yawik/jobs": "^0.33",
+        "yawik/orders": "^0.3",
+        "yawik/jobs-by-mail": "^0.2",
+        "yawik/solr": "^0.6",
+        "yawik/simple-import": "^0.1",
+        "yawik/organizations": "^0.33",
+        "yawik/pdf": "^0.33",
+        "yawik/composer-plugin": "^0.32@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "JobsFrankfurt\\": "src/"
+        }
+    },
+    "config": {
+        "platform": {
+            "ext-mongo": "1.6.16"
+        }
+    },
+    "scripts": {
+        "auto-scripts": [
+            "npm install"
+        ],
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ],
+        "serve": "APPLICATION_ENV=development php -S localhost:8000 -t test/sandbox/public",
+        "start-selenium": "./vendor/bin/selenium-server-standalone -p 4444 -Dwebdriver.chrome.driver=./vendor/bin/chromedriver",
+        "test": "phpunit"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "0.32-dev"
+        },
+        "zf": {
+            "module": "JobsFrankfurt"
+        }
+    }
+}

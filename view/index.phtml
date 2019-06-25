@@ -1,0 +1,120 @@
+<?php
+/**
+ * YAWIK
+ *
+ * view sript of the start page for unauthenticated users
+ *
+ * @copyright (c) 2013 - 2016 Cross Solution (http://cross-solution.de)
+ * @license   MIT
+ */
+
+/* @todo Probably, we should create a dedicated IndexController to inject this dependencies. */
+$form = $this->services('forms.Jobs/JobboardSearch');
+$form->setButtonElement('q');
+$form->setAttribute('action', $this->url('lang/jobboard', [], true));
+
+$this->headTitle('Jobs');
+$this->headMeta()->appendName("keywords", "Jobs");
+$this->headMeta()->appendName("description", "Jobs");
+$this->headScript()->appendFile($this->basePath('modules/JobsFrankfurt/js/index.js'));
+
+?>
+
+<div id="searchform-wrapper" class="row text-center">
+    <h1>Jobs für Fachkräfte</h1>
+    <p class="lead">Spannende Jobs für Gastronomie, Hotellerie und Tourismus auf einen Klick finden</p>
+    <nav class="navbar" id="jobs-list-filter-wrapper">
+        <div class="search-form-container">
+          <?=$this->form()->openTag($form)?>
+          <div class="row">
+            <div class="input-group col-md-6 col-xs-12"><?=$this->formElement($form->get('q'))?></div>
+            <div class="input-group col-md-2 col-xs-6"><?=$this->formElement($form->get('l'))?></div>
+            <div class="input-group col-md-2 col-xs-6"><?=$this->formElement($form->get('d'))?></div>
+            <div class="input-group col-md-2 col-xs-12"><?=$this->searchForm()->renderButtons($form->getButtons())?></div>
+         </div>
+          <?=$this->form()->closeTag()?>
+        </div>
+    </nav>
+</div>
+
+<?php
+
+$queries = $this->services(\Gastro24\Options\Landingpages::class);
+
+
+$tabs = [];
+$sections = [];
+$active = ' active';
+$sectionHtml = '';
+foreach ($queries->getTabs() as $tab => $sections):
+    $tabSlug = strtolower(str_replace(' ', '', $tab));
+    $tabs[$tabSlug] = $tab;
+    $sectionHtml .= '<div class="tab-pane' . $active . '" id="' . $tabSlug . '"><div class="row">';
+    $active='';
+    foreach ($sections as $section => $links):
+        $sectionHtml .= '<div class="col-md-4"><div class="panel panel-default"><div class="panel-heading"><h3 class="panel-title">' .
+                        $section . '</h3></div><div class="panel-body"><ul>';
+
+        foreach ($links as $spec):
+            $sectionHtml .= '<li><a href="' .
+                            $this->url('lang/landingPage', ['q' => $spec[0], 'format' => 'html' ], true) . '">' .
+                            $spec[1] .'</a></li>';
+        endforeach;
+        $sectionHtml .= '</ul></div></div></div>';
+    endforeach;
+    $sectionHtml .= '</div></div>';
+endforeach;
+
+
+?>
+
+
+<div class="container">
+    <ul class="nav nav-tabs">
+        <?php $active=' class="active"'; foreach ($tabs as $slug => $name):?>
+        <li<?=$active?>><a href="#<?=$slug?>" data-toggle="tab"><?=$name?></a></li>
+        <?php $active=''; endforeach ?>
+    </ul>
+    <div class="tab-content"><p></p><?=$sectionHtml?></div>
+</div>
+<?php $companies = $queries->getCompanies();
+if (count($companies)):
+    $companies = array_chunk($companies, 6, true);?>
+<div id="logos-selected">
+ <div class="container">
+     <div class="row">
+ <h3 class="text-center">Unternehmen mit freien Jobs im Gastrogewerbe</h3>
+
+    <h3 class="text-center">Unternehmen mit freien Gastronomie Stellen</h3>
+ <div id="companies-slider" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <?php for ($i=0, $c=count($companies); $i<$c; $i+=1):?>
+        <li<?=0===$i ? ' class="active"' : '' ?> style="background-color: #666;" data-target="#companies-slider" data-slide-to="<?=$i?>"></li>
+        <?php endfor ?>
+    </ol>
+
+    <div class="carousel-inner">
+        <?php $active=" active"; foreach ($companies as $comps):?>
+            <div class="item<?=$active?> container">
+                <div class="row">
+                    <?php foreach ($comps as $term => $spec):?>
+                        <div class="col-md-2">
+                            <a style="display: flex; align-items: center; height: 80px; width: 100%" class="text-center" href="<?=$this->url('lang/landingPage', ['q' => $term, 'format' => 'html' ], true) ?>">
+                                <span style="display:inline-block; width: 100%; text-align: center;">
+                                <?php if ($spec[1]): ?>
+                            <img src="<?=$spec[1]?>" alt="<?=$spec[0]?>"  style="max-width: 120px">
+                                <?php else: ?>
+                                    <?=$spec[0]?>
+                                <?php endif ?>
+                                </span></a>
+                        </div>
+                    <?php endforeach ?>
+                </div>
+            </div>
+        <?php $active = ''; endforeach ?>
+    </div>
+  </div>
+ </div>
+</div>
+<div>
+<?php endif ?>

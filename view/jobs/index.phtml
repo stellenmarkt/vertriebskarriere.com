@@ -1,0 +1,222 @@
+<?php //description: Renders the list of public jobs. ?>
+<?php
+$this->headScript()->appendFile($this->basepath('/modules/Core/js/core.pagination-container.js'))
+     ->appendFile($this->basePath('modules/Core/js/core.forms.js'))
+
+     ->appendFile($this->basePath('modules/JobsFrankfurt/js/jquery.matchHeight.js'))
+     ->appendFile($this->basePath('modules/JobsFrankfurt/js/jobs.js'));;
+
+    $this->headScript()
+                       ->appendFile($this->basePath('/dist/js/bootstrap-dialog.min.js'));
+
+?>
+<?php
+
+$queryGet = $this->params()->fromQuery();
+unset($queryGet['clear']);
+$query = $this->params()->fromRoute('wpId') ?: (count($queryGet) ? 0 : 304);
+$wordpress = $this->proxy('wordpress');
+
+$this->headMeta()->setName('description', $wordpress->chain(['page' => $query, 'value' => 'meta-fields.description'], ''));
+$this->headMeta()->setName('keywords', $wordpress->call('value', ['meta-fields.keywords'], ''));
+$description = $wordpress->call('value', ['content.rendered'], '');
+
+$title = $wordpress->call('value', ['meta-fields.title'], '');
+$this->headTitle($title ?: $this->translate('Jobs'));
+
+$robots = "noindex,follow";
+if (304 === $query || ($this->params()->fromRoute('isLandingPage') && !$this->params()->fromRoute('isFilteredLandingPage') && (count($this->jobs) || $description))) {
+    $robots = substr($robots, 2);
+}
+$this->headMeta()->setName('robots', $robots);
+$this->headScript()->captureStart();
+
+?>
+
+
+
+(function($) {
+
+    $(function() {
+        var $tabbar = $('#search-tabs');
+
+        $('#jobs-list-container').on('yk-paginator-container:loaded.gastro24 g24-jobs:init', function(ev) {
+            $tabbar.show();
+            var html = $('#jobs-list-container').find('.pagination-content').html();
+
+            if ('' === html.trim()) { $tabbar.hide(); }
+
+            $('#jobs-list-container ul.pagination a, link[rel="prev"], link[rel="next"]').each(function() {
+                var $a = $(this), href = $a.attr('href');
+                console.debug($a, href);
+                if (href) {
+                    href = href.replace(/__region_MultiString/, 'r')
+                               .replace(/__city_MultiString/, 'l')
+                               .replace(/__organizationTag/, 'c')
+                               .replace(/__profession_MultiString/, 'p')
+                               .replace(/__industry_MultiString/, 'i')
+                               .replace(/__employmentType_MultiString/, 't');
+                    $a.attr('href', href);
+                }
+            });
+
+
+        }).trigger('g24-jobs:init');
+
+        var $jobCount = $('#job-count');
+
+        $('#jobs-list-container').on('yk-paginator-container:loaded.gastro24-job-count', function(ev) {
+            var count = $('#update-job-count').text();
+            $jobCount.text(count);
+        });
+
+        $('#jobs-list-filter').on('reset.gastro24', function(ev) { $(ev.target).find('input.facet-param').remove(); });
+
+    });
+})(jQuery);
+<?php $this->headScript()->captureEnd();?>
+
+
+
+<?php if ($jobs instanceof \Solr\FacetsProviderInterface): $this->headScript()->appendFile($this->basePath('modules/JobsFrankfurt/js/jobs.facets.js')); endif; ?>
+
+
+
+<?php echo $this->flashMessenger()->render('default', array('alert', 'alert-success')) ?>
+
+<div id="jobs-list-filter-wrapper">
+    <div class="search-form-container ">
+            <div class="container ">
+        <?php
+            $queryParams = $this->params()->fromQuery();
+            foreach (array_keys($this->jobs->getFacets()->toArray()) as $facetName):
+                if (isset($queryParams['__' . $facetName])) {
+                    $facetValues = explode('_', $queryParams['__' . $facetName]);
+                    $facetValues = array_fill_keys($facetValues, '1');
+                    $queryParams[$facetName] = $facetValues;
+                }
+                if (isset($queryParams[$facetName])):
+                    foreach (array_keys($queryParams[$facetName]) as $facetValue):
+                        $this->filterForm->add(['type' => 'hidden', 'name' => $facetName . '[' . $facetValue . ']',
+                                                'attributes' => ['class' => 'facet-param', 'value' => 1]]);
+                    endforeach;
+                endif;
+            endforeach;
+            $this->filterForm->setButtonElement('d');
+            //$this->filterForm->add( ['type' => 'hidden', 'name' => 'clear', 'attributes' => ['value' => 1]]);
+            $this->filterForm->setAttribute('data-handle-by', 'native');
+            $this->filterForm->setAttribute('action', $this->url('lang/jobboard', [], true));
+             ?>
+             <div class="search-form-container">
+                 <?=$this->searchForm()->openTag($filterForm)?>
+                 <div class="row">
+                 <div class="input-group col-md-5 col-xs-12 pull-left"><?=$this->formElement($filterForm->get('q'))?></div>
+                 <div class="input-group col-md-4 col-xs-6 pull-left"><?=$this->formElement($filterForm->get('l'))?></div>
+                 <div class="input-group col-md-1 col-xs-6 pull-left"><?=$this->formElement($filterForm->get('d'))?></div>
+                 <div class="input-group col-md-2 col-xs-12 pull-left"><?=$this->searchForm()->renderButtons($filterForm->getButtons())?></div>
+                 </div>
+                 <?=$this->searchForm()->closeTag()?>
+             </div>
+  </div>
+ </div>
+</div>
+
+
+		 <?php $parts=preg_split('~<!--more-->~' , $description);?>
+
+
+
+
+
+   <style>
+
+
+
+    #similar a {
+    text-decoration: underline;
+    color: #3a434f;
+    margin-left: 8px;
+}
+
+
+
+   </style>
+
+   <div id="similar">
+       <div class="row">
+         <div class="col-md-9">
+           <?php if (isset($parts[0]) && "" != trim($parts[0])): ?>
+             <?= $parts[0] ?>
+                 <?php if (51 == $query): echo $this->landingpages(); endif; ?>
+
+            <?php endif ?>
+         </div>
+          <div class="col-md-3">
+
+
+        <div class="clearfix"></div>
+      </div>
+   </div>
+  <hr />
+</div>
+
+
+
+<?php if (!count($this->jobs)):?>
+    <?=$this->proxy('jobsByMailSubscriptionForm')->render($jobs)?>
+    <script type="text/javascript">
+        ;(function($) {
+            $(function() {
+                $('#form-jobsbymail-subscribe-form').find('button.btn-info').hide().click()
+                    .end().find('#job-by-mail-subscribe-label').html('Informiert werden, sobald Jobs zu Ihrer Suchanfrage verfügbar sind.');
+                $('#jobs-list-container').data('container').$message.show();
+            });
+        })(jQuery);
+    </script>
+<?php endif ?>
+
+    <div class="row">
+        <div class="tab-content">
+            <div id="jobs-list-container" class="pagination-container"
+                 data-message="<?php echo $this->escapeHtmlAttr(sprintf(
+                                                                    $this->translate('%sSorry%s, there are not any jobs matching your search criteria.'
+                                                                    ),
+                                                                    '<strong>', '</strong>'
+                                                                )
+                 ) ?>"
+                 data-uri="<?php
+                 echo $this->url('lang/jobboard', array(), array('query' => $this->params()->fromQuery()), true) ?>">
+
+               <div class="col-md-12">
+                <div class="pagination-message alert alert-warning" style="display:none">
+                    <?=sprintf(
+                           $this->translate('%sSorry%s, there are not any jobs matching your search criteria.'
+                           ),
+                           '<strong>', '</strong>'
+                       )?>
+                </div>
+              </div>
+                <div class="container pagination-content">
+                    <div class="row">
+                       <?php echo $this->render('jobs/jobboard/index.ajax.phtml') ?>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+<div class="modal fade" id="job-apply-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" style="width: 90%; height: 90%" role="document">
+        <div class="modal-content" style="height: 100%">
+            <div class="modal-body" style="height: calc(100% - 65px)">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Schliessen</button>
+            </div>
+        </div>
+    </div>

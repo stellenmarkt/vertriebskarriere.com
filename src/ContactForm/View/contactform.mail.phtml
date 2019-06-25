@@ -1,0 +1,27 @@
+<?php
+/**
+ * YAWIK
+ *
+ * @filesource
+ * @license MIT
+ * @copyright  2013 - 2018 Cross Solution <http://cross-solution.de>
+ */
+
+$this->setSubject('[Gastro24] Kontakt-Anfrage von ' . $this->name . ' / ' . $this->organization);
+?>
+
+<table>
+    <?php foreach (['organization' => 'Unternehmen',
+                    'name' => 'Ansprechpartner',
+                    'phonenumber' => 'Telefon',
+                    'email' => 'E-Mail',
+                    'website' => 'Website',
+                                                    ] as $key => $label):?>
+    <tr>
+        <td><?=$label?></td>
+        <td><?=$this->$key?></td>
+    </tr>
+    <?php endforeach ?>
+</table>
+
+<div style="border: 1px solid grey; padding:10px;"><pre><?=$this->message?></pre></div>

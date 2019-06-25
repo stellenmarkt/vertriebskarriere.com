@@ -1,0 +1,40 @@
+<?php
+/**
+ * YAWIK
+ *
+ * @filesource
+ * @license MIT
+ * @copyright  2013 - 2018 Cross Solution <http://cross-solution.de>
+ */
+
+$job = $this->element->getObject();
+$company = $job->getOrganization();
+if (!$company) { return; }
+
+$owner = $company->getUser();
+
+if (!$owner) { return; }
+
+$product = $owner->getAttachedEntity(\Gastro24\Entity\UserProduct::class);
+$product = $product ? $product->getProduct() : null;
+
+if (!$product) { return; }
+
+?>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h3><?=$product instanceOf \Gastro24\Entity\Product\Basic ? 'Basic' : 'Plus' ?></h3>
+        <?php if ($product->isExpired()): ?>
+            <p>Ihr Abonnement ist am <?=$this->dateFormat($product->getEndDate(), \IntlDateFormatter::MEDIUM, \IntlDateFormatter::NONE)?> abgelaufen.</p>
+        <?php else: ?>
+            <p>Ihr Abonnement ist gültig bis zum <?=$this->dateFormat($product->getEndDate(), \IntlDateFormatter::MEDIUM, \IntlDateFormatter::NONE)?></p>
+        <?php endif ?>
+        
+        <?php if ($product->hasAvailableJobAmount()): ?>
+            <p>Sie haben <?=($count = $product->getJobCount()) ? 'bereits ' . $count : 'noch keine '?> Ihrer <?=$product->getAvailableJobAmount()?> Jobs geschaltet.</p>
+        <?php else:?>
+            <p>Sie haben bereits alle <?=$product->getAvailableJobAmount()?> Jobs geschaltet.</p>
+        <?php endif ?>
+
+    </div>
+</div>

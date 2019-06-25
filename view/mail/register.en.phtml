@@ -1,0 +1,42 @@
+<?php
+/**
+ * YAWIK
+ * Auth Module
+ *
+ * @copyright (c) 2013 - 2016 Cross Solution (http://cross-solution.de)
+ * @license       MIT
+ */
+/*
+ * Sends a confirmation link to the user, after registration
+ */
+/* @var Auth\Entity\Info $user */
+
+// shared vars used in mails
+include( __DIR__ . '/' . 'vars.inc.phtml');
+
+?>
+<div style="background: #eee;width: 100%;height: 100vh;">
+    <div class="size margin-auto"
+         style="background-color:<?= $mail_white_color ?>;max-width:<?= $width ?>;width:100%;margin-left: auto;margin-right: auto;">
+        <?= $this->partial('mail/header', [
+            'title'            => 'Registration',
+            'width'            => $width,
+            'mail_blue_color'  => $mail_blue_color,
+            'mail_white_color' => $mail_white_color
+        ]
+        ); ?>
+
+        <div class="seprate_footer" style="padding:10px;">
+            <?= $this->partial('mail/header'); ?>
+            <h3>Dear <?= $this->name; ?>,</h3>
+
+            <p>You've successfully registered on <?= $this->siteName; ?></p>
+
+            <p>please confirm your registration by clicking the following link:</p>
+
+            <a href="<?= $this->confirmationlink; ?>"><?= $this->confirmationlink; ?></a>
+
+            <?= $this->partial('mail/footer', ['width' => $width, 'mail_white_color' => $mail_white_color]); ?>
+        </div>
+    </div>
+</div>

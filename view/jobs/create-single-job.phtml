@@ -1,0 +1,192 @@
+<?php
+/**
+ * YAWIK
+ *
+ * @filesource
+ * @license MIT
+ * @copyright  2013 - 2018 Cross Solution <http://cross-solution.de>
+ */
+
+
+$this->headTitle('Kostenlos Einzelinserat aufgeben');
+?>
+<?php if (!$this->isProcessed):?>
+   <h1>Einzelinserat bis Ende 2018 <strong>kostenlos</strong> inserieren</h1>
+   <hr />
+ <?php endif?>
+<?php if ($this->isProcessed):?>
+
+
+    <div class="col-md-9">
+        <div class="row">
+            
+            
+            <div class="panel panel-default">
+                <div class="panel-body">
+                  <h6 style="color:#31b0d5; text-transform:uppercase; margin-bottom:5px" class="h3"><?= $this->invoiceAddress['company']?></h6>
+                  <h1 style="margin-top:0px;font-size: 30px;font-weight: 700;">
+                    <?=$this->title?>
+                  </h1>
+                  <p><?php
+
+                foreach ($this->locations as $loc) {
+                    $location = new \Jobs\Entity\Location($loc);
+                    echo $location->getCity() . '<br>';
+                }
+                    ?></p>
+                  <a   style="background-color: #d9534f;
+    border-color: #d43f3a" class="btn btn-primary" href="?do=complete">Einzelinserat jetzt schalten</a>
+      
+                  
+                </div>
+                
+             </div>
+                
+
+    <?php if ('html' == $this->details['mode']):?>
+     <div class="panel panel-default">
+         
+         <?php $image=isset($this->details['image']['entity'])
+                                         ? $this->details['image']['entity'] : null;
+                                 if ($image):?>
+                              
+                                <img style="width:100%; margin-bottom:15px" src="<?=$this->basePath($image->getUri())?>">
+                                <?php endif?>
+         
+                     <div class="panel-body">
+    
+                           
+
+                    
+                
+                          <?=$this->details['position']?>
+                           
+                          <?=$this->details['requirements']?>
+                         
+                          <?=$this->details['description']?>
+                    </div>
+                 </div>
+                     <?php else: ?>
+    
+                       <iframe style="background-color: #fff; width: 100%; height: 1800px;overflow: auto;" class="panel panel-default" frameborder="0" allowfullscreen="" src="<?= $this->details['uri'] ?>"></iframe>
+     
+                     <?php endif ?>  
+                 
+
+
+           
+            
+
+              
+   <div class="panel panel-default">     
+    <div class="panel-body">
+         <h3>Rechnungsanschrift (kostenlos bis Ende 2018)</h3>
+        
+        
+                <address>
+                    <?=$this->invoiceAddress['company']?><br>
+                    <?=$this->invoiceAddress['name']?> ( <?=$this->link($this->invoiceAddress['email']) ?> )<br>
+                    <?=$this->invoiceAddress['street']?> <?=$this->invoiceAddress['houseNumber']?><br>
+                    <?=$this->invoiceAddress['zipCode']?> <?=$this->invoiceAddress['city']?><br>
+                    <?=$this->invoiceAddress['region'] ?><br /><?=$this->invoiceAddress['country']?>
+                </address>
+       </div>
+     </div>
+        
+                 
+                 
+                 
+             
+          </div>  
+          
+               
+          </div>  
+          
+            <div class="col-md-3">
+               <div class="panel panel-default">
+                   <div class="panel-body">
+                      <div itemprop="logo" style="text-align:center; margin-bottom:15px">
+                         <?php $logo=isset($this->details['logo']['entity'])
+                                ? $this->details['logo']['entity'] : null;
+                            if ($logo):?>
+                                       <div  style=" 
+                                          margin: 0 auto;
+                                          width: 115px;
+                                          height: 115px;   
+                                          transition: border .2s ease-in-out;
+                                          position: relative;
+                                          display: block;
+                                          padding: 4px;
+                                          line-height: 1.5;
+                                          background-color: #fff;
+                                          border: 1px solid #ddd;
+                                          border-radius: 3px;
+                                        overflow: hidden;">
+                                             <img style="
+                                             margin-bottom: auto;
+                                             text-align: center;
+                                             width: 65%;
+                                             position: absolute;
+                                             top: 5%;
+                                             bottom: 5%;
+                                             left: 5%;
+                                             right: 5%;
+                                             margin: auto;" src="<?=$this->basePath($logo->getUri())?>">
+                                       </div>
+
+                            <?php endif?>
+                       </div>
+                
+                      <h2 class="text-center"><?= $this->invoiceAddress['company']?></h2>
+         
+              </div>
+           </div>
+         </div>
+        
+            
+         
+                    
+      
+      
+      
+      
+      
+      
+
+           
+            
+
+            
+     
+     
+     
+
+       
+       
+       
+       
+  
+       
+<?php elseif ($this->isSuccess): ?>
+
+       
+ <div class="panel panel-default">     
+    <div class="panel-body">  
+    <?=$this->alert()->success('Inserat erfolgreich angelegt.');?>
+    <p class="lead">Vielen Dank.</p>
+    <p>Ihre Anzeige wurde angelegt. Nach der Prüfung wird sie freigeschaltet.</p>
+<?php elseif ($this->isError): ?>
+    <?=$this->alert()->danger('Inserat anlegen fehlgeschlagen');?>
+    <p class="lead">Das Inserat konnte nicht angelegt werden.</p>
+<p>Es ist ein Fehler aufgetreten. Versuchen Sie es <a href="">erneut</a> ...</p>
+
+     </div>
+   </div>
+<?php else: ?>
+<div class="container"><div class="row"><div class="col-md-12">
+            <?=$this->form($this->form->setAttribute('data-handle-by', 'native'))?>
+</div></div></div>
+<?php endif ?>
+
+
+

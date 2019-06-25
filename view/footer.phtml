@@ -1,0 +1,62 @@
+<?php
+/**
+ * YAWIK
+ *
+ * @filesource
+ * @author    Carsten Bleek <bleek@cross-solution.de>
+ * @copyright 2013-2017 Cross Solution (http://cross-solution.de)
+ * @version   GIT: $Id$
+ * @license   https://yawik.org/LICENSE.txt MIT
+ */
+?>
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6 col-md-2">
+                <h5>Über Jobs-Frankfurt.com</h5>
+                <nav>
+                    <ul class="list-unstyled">
+                        <li><a title="" href="/de/wp/page/ueber-uns">Über uns</a></li>
+                        <li><a title="" href="/de/wp/page/jobs">Arbeiten bei uns</a></li>
+                        <!-- <li><a title="" href="/de/wp/page/partnernetzwerk">Partnernetzwerk</a></li>-->
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-xs-6 col-md-2">
+                <h5>Social Media</h5>
+                <nav>
+                    <ul class="list-unstyled">
+                        <li><a title="Stelllenmarkt bei Facebook" href="https://www.facebook.com/stellenmarkt.de/" target="_blank">Facebook</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-xs-6 col-md-2">
+                <h5>Für Arbeitgeber</h5>
+                <nav>
+                    <ul class="list-unstyled">
+                         <li><a title="Häufige Fragen & Antworten" href="/de/wp/page/faq">Hilfe</a></li>
+                        <?php if (!$this->auth()->isLoggedIn()):?>
+                        <li><a title="Login für Arbeitgeber" href="<?=$this->url('lang/auth', [], true)?>?ref=<?= urlencode($this->url('lang/dashboard', [], true)) ?>">Einloggen</a></li>
+                        <?php endif ?>
+                        <?php if (!$this->auth()->isLoggedIn()):?> <li><a title="Preise & Leistungen" href="/de/wp/page/job-abc">Job ABC</a></li>   <?php endif ?>
+                    </ul>
+                </nav>
+            </div>
+            <!--<div class="col-md-offset-3 col-md-3">
+                <?php #$this->languageSwitcher()?>
+            </div>-->
+        </div>
+
+        <hr style="border-top: 1px solid #b6bed6">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <nav>
+                    <ul class="list-inline">
+                        <li><a title="Impressum" href="/de/wp/page/impressum">Impressum</a></li>
+                        <li><a title="AGB" href="/de/wp/page/agb">AGB</a></li>
+                    </ul>
+                </nav>
+                <p>Copyright &copy; Jobs-Frankfurt.com <?=date('Y')?></p>
+            </div>
+        </div>
+</footer>

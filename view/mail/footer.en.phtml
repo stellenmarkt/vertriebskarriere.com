@@ -1,0 +1,42 @@
+<?php
+/**
+ * YAWIK
+ *
+ * @filesource
+ * @copyright (c) 2013 - 2016 Cross Solution (http://cross-solution.de)
+ * @author bleek@cross-solution.de
+ * @license   MIT
+ */
+/*
+ * Mail footer used in various mails via <?php echo $this->partial('mail/footer'); ?>
+ */
+
+/* @var \Core\Options\ModuleOptions $options */
+$options = $this->services('Core/Options');
+$siteName = $options->getSiteName();
+$operator = $options->getOperator();
+
+?>
+<table class="size margin-auto" style="background-color:<?= $this->mail_white_color ?>;max-width:<?= $this->width ?>; width:100%;margin-left: auto;margin-right: auto;">
+    <tr>
+        <td align="center" style="text-align: left;padding: 20px 0;">
+            <p>Sincerely,</p>
+            <p>Your Jobs-Frankfurt.com Team</p><p>
+        </td>
+    </tr>
+</table>
+<table class="size margin-auto" style="background-color:#2D3638;max-width:<?= $this->width ?>;width:100%;margin-left: auto;margin-right: auto;">
+    <tr>
+        <td align="center" style="text-align: left;padding: 20px 0px; font-family:Helvetica,Arial,sans-serif;">
+            <p style="color:<?= $this->mail_white_color ?>;text-align:center;">a service by stellenmarkt.com | Goethestraße 35 |
+60313 Frankfurt</p>
+        </td>
+    </tr>
+</table>
+<table class="size margin-auto" style="background-color:<?= $this->mail_white_color ?>;max-width:<?= $this->width ?>;width:100%;margin-left: auto;margin-right: auto;">
+    <tr>
+        <td align="center" style="text-align: left;font-family:Helvetica,Arial,sans-serif;">
+            <p style="color:#9FADB1;text-align:center;font-size:12px;">This is an automatically generated e-mail. Please do not reply to this e-mail.</p>
+        </td>
+    </tr>
+</table>

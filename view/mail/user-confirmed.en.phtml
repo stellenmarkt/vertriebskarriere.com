@@ -1,0 +1,40 @@
+<?php
+/**
+ * YAWIK
+ * Auth Module
+ *
+ * @copyright (c) 2013 - 2016 Cross Solution (http://cross-solution.de)
+ * @license       MIT
+ */
+/*
+ *
+ */
+
+$this->mail->setSubject('A registered user was confirmed.');
+
+// shared vars used in mails
+include(__DIR__ . '/' . 'vars.inc.phtml');
+
+?>
+<div style="background: #eee;width: 100%;height: 100vh;">
+    <div class="size margin-auto"
+         style="background-color:<?= $mail_white_color ?>;max-width:<?= $width ?>;width:100%;margin-left: auto;margin-right: auto;">
+        <?= $this->partial('mail/header', [
+                                            'title'            => 'Kennwort zurücksenden',
+                                            'width'            => $width,
+                                            'mail_blue_color'  => $mail_blue_color,
+                                            'mail_white_color' => $mail_white_color
+                                        ]
+        ); ?>
+
+        <div class="seprate_footer" style="padding:10px;">
+
+            <p>A user was just confirmed: <?= $this->user->getInfo()->getDisplayName(false) ?>
+                &lt;<?= $this->user->getInfo()->getEmail() ?>&gt;</p>
+
+            <p>This user is now fully registered and active.</p>
+
+            <?= $this->partial('mail/footer', ['width' => $width, 'mail_white_color' => $mail_white_color]); ?>
+        </div>
+    </div>
+</div>

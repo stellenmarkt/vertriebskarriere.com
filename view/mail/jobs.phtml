@@ -1,0 +1,182 @@
+<?php
+/**
+ * YAWIK
+ *
+ * @filesource
+ * @copyright (c) 2013 - 2017 Cross Solution (http://cross-solution.de)
+ * @license       MIT
+ * @author        bleek@cross-solution.de
+ */
+
+/** @var \JobsByMail\Entity\SearchProfileInterface $searchProfile */
+$searchProfile = $this->searchProfile;
+$lang = $searchProfile->getLanguage()?:'de';
+
+/** @var \Core\Options\ModuleOptions $options */
+$options  = $this->services('Core/Options');
+$siteName = $options->getSiteName();
+$operator = $options->getOperator();
+
+/** @var \Zend\View\Renderer\PhpRenderer $this */
+/** @var \Zend\View\Helper\ServerUrl $serverUrl */
+$serverUrl = $this->plugin('serverUrl');
+$serverUrl->setHost($this->host)
+          ->setScheme($this->scheme);
+/** @var \Zend\View\Helper\BasePath $basePath */
+$basePath = $this->plugin('basePath');
+$basePath->setBasePath($this->basePath);
+/** @var \Zend\Router\Http\TreeRouteStack $router */
+
+$router = $this->services('HttpRouter');
+$router->setBaseUrl($this->basePath);
+
+/** @var \JobsByMail\Service\Hash $hash */
+$hash = $this->hash;
+
+
+$unsubscribeUrl = $this->serverUrl(
+    $this->url('lang/jobsbymail/unsubscribe',
+               [
+                   'lang' => $lang,
+                   'id'   => $searchProfile->getId(),
+                   'hash' => $hash->generate($searchProfile)
+               ]
+    )
+);
+
+$homepageUrl = $this->serverUrl($this->basePath('/'));
+
+
+// shared vars used in mails
+include(__DIR__ . '/' . 'vars.inc.phtml');
+
+$this->setSubject('(Job-Abo) Neue Jobs für Sie');
+
+?>
+
+   <?= $this->partial('mail/header', [
+                        'title' => sprintf('Neue Jobs seit %s',
+                                  $this->dateFormat($searchProfile->getDateLastMail(), 'short', 'none')
+                                          ),
+                        'width'            => $width,
+                        'mail_blue_color'  => $mail_blue_color,
+                        'mail_white_color' => $mail_white_color
+                    ]
+        ); ?>
+
+
+ <tr>
+	 <td align="center" valign="top">
+									<!-- CENTERING TABLE // -->
+									<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#FFF">
+										<tbody><tr>
+											<td align="center" valign="top">
+												<!-- FLEXIBLE CONTAINER // -->
+												<table border="0" cellpadding="0" cellspacing="0" width="500" class="flexibleContainer">
+													<tbody><tr>
+														<td align="center" valign="top" width="500" class="flexibleContainerCell">
+															<table border="0" cellpadding="30" cellspacing="0" width="100%">
+																<tbody><tr>
+																	<td align="center" valign="top">
+
+																		<!-- CONTENT TABLE // -->
+																		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+																			<tbody><tr>
+																				<td valign="top" class="textContent">
+
+<h3 mc:edit="header" style="color:<?=$mail_blue_color?>;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:bold;margin-top:0;margin-bottom:3px;text-align:left;">
+Neue Jobs warten auf Sie</h3>
+<div mc:edit="body" style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">
+     <?php foreach ($this->jobs as $job): /** @var \Jobs\Entity\Job $job */ ?>
+                <?php
+
+                $jobUrl = $this->jobUrl(
+                    $job,
+                    [
+                        'linkOnly' => true,
+                        'absolute' => true
+                    ],
+                    [
+                        'lang' => $lang
+                    ]
+                );
+
+                $organization    = $job->getOrganization();
+                $hasOrganization = $organization && is_object($organization->getOrganizationName());
+
+                ?>
+                <!--   Beginning of new jobs   -->
+
+
+                            <p><a href="<?= $jobUrl ?>"><?= $job->getTitle() ?></a><br />
+
+                                <?php if ($hasOrganization
+                                          && $organization->getOrganizationName()->getName()
+                                ): ?>
+                                    <?= $organization->getOrganizationName()->getName() ?>,
+                                <?php endif ?>
+                                <?= $job->getLocation() ?>, (<?php
+                                if ($job->getDatePublishStart()
+                                ): echo $this->dateFormat($job->getDatePublishStart(), 'short', 'none');
+                                elseif ($job->getDateCreated()
+                                ): echo $this->dateFormat($job->getDateCreated(), 'short', 'none');
+                                endif
+                                ?>)</p>
+
+
+            <?php endforeach; ?>
+	</div>
+																				</td>
+																			</tr>
+																		</tbody></table>
+																		<!-- // CONTENT TABLE -->
+
+																	</td>
+																</tr>
+															</tbody></table>
+														</td>
+													</tr>
+												</tbody></table>
+												<!-- // FLEXIBLE CONTAINER -->
+											</td>
+										</tr>
+									</tbody></table>
+									<!-- // CENTERING TABLE -->
+								</td>
+							</tr>
+
+						<!-- MODULE ROW // -->
+							<tr>
+								<td align="center" valign="top">
+									<!-- CENTERING TABLE // -->
+									<table border="0" cellpadding="0" cellspacing="0" width="100%">
+										<tr style="padding-top:0;">
+											<td align="center" valign="top">
+												<!-- FLEXIBLE CONTAINER // -->
+												<table border="0" cellpadding="30" cellspacing="0" width="500" class="flexibleContainer">
+													<tr>
+														<td style="padding-top:0;" align="center" valign="top" width="500" class="flexibleContainerCell">
+
+															<!-- CONTENT TABLE // -->
+															<table border="0" cellpadding="0" cellspacing="0" width="50%" class="emailButton" style="background-color: <?=$mail_blue_color?>;">
+																<tr>
+																	<td align="center" valign="middle" class="buttonContent" style="padding-top:15px;padding-bottom:15px;padding-right:15px;padding-left:15px;">
+<a style="color:#FFFFFF;text-decoration:none;font-family:Helvetica,Arial,sans-serif;font-size:20px;line-height:135%;" href="<?= $unsubscribeUrl ?>" target="_blank">Jobmail löschen</a>
+																	</td>
+																</tr>
+															</table>
+															<!-- // CONTENT TABLE -->
+
+														</td>
+													</tr>
+												</table>
+												<!-- // FLEXIBLE CONTAINER -->
+											</td>
+										</tr>
+									</table>
+									<!-- // CENTERING TABLE -->
+								</td>
+							</tr>
+							<!-- // MODULE ROW -->
+
+         <?= $this->partial('mail/footer', ['width' => $width, 'mail_white_color' => $mail_white_color]); ?>

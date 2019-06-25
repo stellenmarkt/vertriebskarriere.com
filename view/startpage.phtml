@@ -1,0 +1,182 @@
+<?php
+/**
+ * Gastrojobs24
+ *
+ * General layout template file. Defines the general layout.
+ *
+ * @copyright (c) 2013 - 2016 Cross Solution (http://cross-solution.de)
+ * @license   Gastrojobs
+ */
+
+/* @var $options \Core\Options\ModuleOptions */
+$options = $this->services('Core/Options');
+$languages = $options->getSupportedLanguages();
+$lang = $this->params('lang');
+
+
+// See: http://yawik.readthedocs.org/en/latest/modules/core/notifications.html
+
+$notifications = $this->partial('core/notifications');
+
+// set default page title
+
+$this->headTitle($this->translate('Jobs-Frankfurt.com'))->setSeparator(' | ')->setAutoEscape(false);
+
+// set default keywords
+
+$this->headMeta()->setCharset("utf-8")
+                 ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+                 ->appendName('keywords', 'Jobs, Stellenmarkt, Stellenangebote, Job, Stellenanzeigen, Jobbörse')
+                 ->appendName('description', 'Jobs-Frankfurt.com | Aktuelle Jobs und Stellenangebote bei Jobs-Frankfurt.com | Der Stellenmarkt für Fach- und Führungskräfte | Online den besten Job finden und sofort bewerben!')
+                 ->appendName('robots', 'index,follow');
+
+$this->headLink()->prependStylesheet($this->basePath('modules/JobsFrankfurt/layout.css'))
+                 ->prependStylesheet($this->basePath('dist/css/core.min.css'));
+
+$langScript = 'dist/locales/' . $lang . '.js';
+
+$this->configHeadScript()->prependFile($this->basepath('dist/js/core.js'))
+                         ->appendFile($this->basePath('modules/JobsFrankfurt/js/jquery.matchHeight.js'))
+                         ->appendFile($this->basePath('modules/JobsFrankfurt/js/index.js'))
+                         ->appendFile($this->basePath('modules/Core/js/core.forms.js'))
+                         ->appendFile($this->basePath($langScript));
+
+$this->configHeadScript()->appendScript('var lang="' . $this->params('lang') . '";'
+    . 'var basePath="' . $this->basePath() . '";');
+
+?>
+
+<?php echo $this->doctype(); ?>
+<html lang="<?php echo $this->params('lang') ?>">
+<head>
+    <?php echo $this->headTitle() ?>
+    <?php echo $this->headMeta() ?>
+    <?php echo $this->configHeadScript() ?>
+    <?php echo $this->headLink() ?>
+    <?php echo $this->headStyle() ?>
+</head>
+<body class="home startpage.phtml">
+
+<div id="wrapper">
+    <div id="bg-full">
+        <span class="bg-static"></span>
+    </div>
+    <header id="header" role="banner" class="container-fluid">
+		     <div class="row navbar">
+               <div class="navbar-header">
+                <button class="navbar-toggle collapsed" data-target="#main-navigation" data-toggle="collapse" type="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand menu-logo" href="<?php echo $this->basepath('/' . $this->params('lang')) ?>">
+                    <img src="<?php echo $this->basepath('/modules/JobsFrankfurt/logo_white.svg') ?>" alt="Jobs-Frankfurt.com" class="menu-logo">
+                </a>
+            </div>
+            <nav id="main-navigation" class="navbar-collapse collapse navbar-collapse" role="navigation">
+                <?=$this->loginInfo(array('lang' => $lang ));?>
+                <?= $this->navigation('Core/Navigation')
+                         ->setAcl($this->services('acl'))
+                         ->setRole($this->auth('role'))
+                         ->menu()
+                         ->setMaxDepth(0) // only show the top level entries
+                         ->renderPartial(null, 'main-navigation');
+//                         ->setUlClass('nav navbar-nav pull-right')//renderPartial(null, 'main-navigation')
+                ?>
+            </nav>
+            <!-- /main-navigation -->
+        </div>
+        <?php
+        /* @todo Probably, we should create a dedicated IndexController to inject this dependencies. */
+        $form = $this->services('forms.Jobs/JobboardSearch');
+        $form->setAttribute('data-handle-by', 'native');
+        $form->setAttribute('action', $this->url('lang/jobboard', [], true));
+
+        ?>
+        <div class="row text-center">
+            <h1>finden Sie Ihren Traumjob</h1>
+            <div class="container">
+              <div id="jobs-list-filter-wrapper">
+                  <div class="search-form-container">
+                      <?=$this->searchForm()->openTag($form)?>
+                      <div class="row">
+                      <div class="input-group col-md-5 col-xs-12 pull-left"><?=$this->formElement($form->get('q'))?></div>
+                      <div class="input-group col-md-4 col-xs-6 col-sm-10 pull-left"><?=$this->formElement($form->get('l'))?></div>
+                      <div class="input-group col-md-1 col-xs-6 col-sm-2 pull-left"><?=$this->formElement($form->get('d'))?></div>
+                      <div class="input-group col-md-2 col-xs-12 pull-left"><?=$this->searchForm()->renderButtons($form->getButtons())?></div>
+                      </div>
+                      <?=$this->searchForm()->closeTag()?>
+                  </div>
+              </div>
+        </div>
+    </header>
+</div>
+<?php
+
+$queries = $this->services(\Gastro24\Options\Landingpages::class);
+$this->headTitle($this->translate('Home'));
+
+?>
+<main id="content" class="container-fluid">
+    <?php echo $notifications?>
+        <?php
+
+        $tabs = [];
+        $sections = [];
+        $active = ' active';
+        $sectionHtml = '';
+#        foreach ($queries->getTabs() as $tab => $sections):
+#            $tabSlug = strtolower(str_replace(' ', '', $tab));
+#            $tabs[$tabSlug] = $tab;
+#            $sectionHtml .= '<hr><h2 class="text-center">' . $tab . '</h2><div class="row">';
+#            $active='';
+#            foreach ($sections as $section => $links):
+#                $sectionHtml .= '<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2"><h3>'. $section .'</h3><ul>';
+#                foreach ($links as $spec):
+#                    $sectionHtml .= '<li><a href="' .
+#                                    $this->url('lang/landingPage', ['q' => $spec[0], 'format' => 'html' ], true) . '">' .
+#                                    $spec[1] .'</a></li>';
+#                endforeach;
+#                $sectionHtml .= '</ul></div>';
+#            endforeach;
+#            $sectionHtml .= '</div>';
+#        endforeach;
+
+        ?>
+        <?=$sectionHtml?>
+        <hr />
+        <div class="row">
+            <div class="text-center">
+             <div class="col-md-12">
+                <h2 class="text-center">Einfach Jobs schalten</h2>
+
+                <a title="Kostenlos Jobs inserieren" href="de/wp/page/stellenanzeigen-schalten" class="btn-block-sm margin-top-smaller btn btn-primary btn-large outline">
+                    <span>Jetzt bis Ende 2018 kostenlos Jobs inserieren</span>
+                </a>
+                <p>&nbsp;</p>
+                </div>
+                <div class="col-md-4">
+                    <h3 class="h6">Hohe Reichweite & Google Job Optimierung</h3>
+                    <p>Ein Job-Inserat, viele Kanäle: Partnernetzwerk, Jobmail-Newsletter, Suchmaschinen und Social Media.</p>
+
+                </div>
+                <div class="col-md-4">
+                    <h3 class="h6">Bewerbermanagement & Jobprofil</h3>
+                    <p>Umfangreiches Bewerbermanagement-System mit Statistiken, E-Mail Vorlagen für Zu- und Absagen, Job-Templates und Vielem mehr. </p>
+
+                </div>
+                <div class="col-md-4">
+                    <h3 class="h6">Einfach & günstig zu neuen Bewerbern</h3>
+                    <p>Unkompliziert und günstig Jobs inserieren -<br /> Bequem mit Rechnung bezahlen.</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- /container -->
+<?php echo $this->partial("footer") ?>
+<?php echo $this->partial("piwik") ?>
+</body>
+</html>

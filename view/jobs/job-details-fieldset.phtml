@@ -1,0 +1,129 @@
+<?php
+/**
+ * YAWIK  - Anzeige im Tab Prozess Nr. 2
+ *
+ * @filesource
+ * @license MIT
+ * @copyright  2013 - 2018 Cross Solution <http://cross-solution.de>
+ */
+
+$fieldset = $this->element;
+$mode = $fieldset->get('mode'); $isUri = 'uri' == $mode->getValue(); $isPdf = 'pdf' == $mode->getValue();
+$modeLabels = $mode->getOption('labels');
+
+?>
+<?php if (isset($this->renderSummary) && $this->renderSummary): ?>
+    <style type="text/css">
+        .mce-content-body { min-height: 100px; }
+        
+    </style>
+<div class="row">
+    <?php if ($isUri): ?>
+        <div class="col-md-3 yk-label">Online-Inserat</div>
+        <div class="col-md-9"><?=$fieldset->get('uri')->getValue()?></div>
+    <?php elseif ($isPdf): ?>
+        <div class="col-md-12">
+            <a href="<?=$fieldset->getObject()->getLink() ?>">PDF-Datei</a> ausgewählt.</div>
+    <?php else: ?>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            
+           
+                
+             <?php $template = $fieldset->getObject()->getAttachedEntity('gastro24-template');
+                if ($template && ($image = $template->getImage())):?>
+                 
+                    <img style="width:100%" src="<?=$this->basePath($image->getUri());?>">
+                <?php endif ?>
+           
+
+             <div class="panel-heading">
+                <h3 class="panel-title">Stellenbeschreibung</h3>
+            </div>
+             <div class="panel-body">
+                <?=$fieldset->get('position')->getValue()?>
+               
+            </div>
+            
+            
+            
+        </div>
+    </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Anforderungen</h3>
+                </div>
+                <div class="panel-body">
+                    <?=$fieldset->get('requirements')->getValue()?>
+                </div>
+            </div>
+        </div>
+
+    <?php endif ?>
+</div>
+<?php else: ?>
+<fieldset id="details-fs">
+    <div class="fieldset-content">
+
+<div class="controls controls-row form-group">
+    <div class="col-md-3 yk-label">&nbsp;</div>
+    <div class="col-md-9">
+    <div class="pull-left" style="margin-right: 15px;" id="csj-mode-uri-span">
+        <input type="radio" id="csj-mode-uri" name="<?=$mode->getName()?>" value="uri" <?=$isUri ? 'checked' : ''?>> <label for="csj-mode-uri"> <?=$modeLabels['uri']?></label>
+    </div>
+    <div class="pull-left" style="margin-right: 15px;" id="csj-mode-pdf-span">
+        <input type="radio" id="csj-mode-pdf" name="<?=$mode->getName()?>" value="pdf" <?=$isPdf ? 'checked' : '' ?>> <label for="csj-mode-pdf"> <?=$modeLabels['pdf']?></label>
+    </div>
+    <div class="pull-left" id="csj-mode-html-span">
+        <input type="radio" id="csj-mode-html" name="<?=$mode->getName()?>" value="html" <?=$isUri || $isPdf ? '' : 'checked' ?>> <label for="csj-mode-html"> <?=$modeLabels['html']?></label>
+    </div>
+    </div>
+</div>
+<?=$this->formRow($fieldset->get('uri'))?>
+<?php $input = $this->formRow($fieldset->get('pdf'));
+    if ($value = $fieldset->get('pdf')->getValue()) {
+        $input = str_replace(
+                '<div class="col-md-9" id="details-pdf-span">',
+                '<div class="col-md-9" id="details-pdf-span"><div class="file-info"><a href="' . $value . '" target="_blank">' . basename($value) . '</a>
+                <a href="?ajax=jobdetailsdelete&file=' .basename($value). '" class="file-delete btn btn-default btn-xs">
+        <span class="yk-icon yk-icon-minus"></span>
+    </a>
+    <input type="hidden" value="' . $value . '" name="pdf_uri"></div>',
+                $input
+        );
+        $input = str_replace('<input type="file"', '<input type="file" style="display:none;"', $input);
+
+    }
+    echo $input;
+
+?>
+        <div class="csj-html-wrapper">
+            <?=$this->formRow($fieldset->get('logo'));
+            ?>
+<?=$this->formRow($fieldset->get('description'))?>
+
+            <?php $input = $this->formRow($fieldset->get('image'));
+            if ($value = $fieldset->get('image')->getValue()) {
+                $input = str_replace(
+                    '<div class="col-md-9" id="details-image-span">',
+                    '<div class="col-md-9" id="details-image-span"><div class="file-info"><a href="' . $value . '" target="_blank">' . basename($value) . '</a>
+                <a href="/' . $value . '?do=delete" class="file-delete btn btn-default btn-xs">
+        <span class="yk-icon yk-icon-minus"></span>
+    </a>
+    <input type="hidden" value="' . basename(dirname($value)) . '" name="details[image_id]"></div>',
+                    $input
+                );
+                $input = str_replace('<input type="file"', '<input type="file" style="display:none;"', $input);
+
+            }
+            echo $input;?>
+
+        <?=$this->formRow($fieldset->get('position')); ?>
+            <?=$this->formRow($fieldset->get('requirements')); ?>
+        </div>
+    </div>
+</fieldset>
+
+
+<?php endif ?>

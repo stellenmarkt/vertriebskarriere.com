@@ -1,0 +1,21 @@
+<?php
+/**
+ * YAWIK
+ *
+ * @filesource
+ * @license MIT
+ * @copyright  2013 - 2017 Cross Solution <http://cross-solution.de>
+ */
+$this->headTitle($this->article->title->rendered);
+$this->configHeadScript()->appendFile($this->basePath('modules/JobsFrankfurt/js/jquery.matchHeight.js'));
+$this->configHeadScript()->appendFile($this->basePath('modules/JobsFrankfurt/js/index.js'));
+
+?>
+
+
+            <h1><?=$this->article->title->rendered?></h1>
+             <hr />
+
+            <div class="wp-content">
+            <?=$this->article->content->rendered;?>
+           </div>

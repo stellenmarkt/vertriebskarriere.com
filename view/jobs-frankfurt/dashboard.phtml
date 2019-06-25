@@ -1,0 +1,51 @@
+<?php
+/**
+ * YAWIK
+ *
+ * @filesource
+ * @license MIT
+ * @copyright  2013 - 2018 Cross Solution <http://cross-solution.de>
+ */
+
+$user = $this->auth()->getUser();
+
+if (!$user) { return; }
+
+$productWrapper = $user->getAttachedEntity(\Gastro24\Entity\UserProduct::class);
+
+if (!$productWrapper) { return; }
+
+$product = $productWrapper->getProduct();
+$name    = str_replace('Gastro24\Entity\Product\\', '', get_class($product));
+?>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Ihr Produkt: <?=$name?></h3>
+    </div>
+
+    <table class="table table-striped">
+        <tbody>
+        <tr>
+            <td>
+                Start:
+            </td>
+            <td>
+                <?=$this->dateFormat($product->getStartDate(), IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE)?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Läuft ab am:
+            </td>
+            <td>
+                <?=$this->dateFormat($product->getEndDate(),IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE)?>
+            </td>
+        </tr>
+        <tr>
+            <td>geschaltete Anzeigen:</td>
+            <td><?=$product->getJobCount()?><?php if ($limit = $product->getAvailableJobAmount()): ?> von <?=$limit?><?php endif ?></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+

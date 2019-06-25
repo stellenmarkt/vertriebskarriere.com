@@ -1,0 +1,228 @@
+<?php
+/**
+ * YAWIK - Anzeige für Vorschau & Ausgabe
+ *
+ * @filesource
+ * @license MIT
+ * @copyright  2013 - 2018 Cross Solution <http://cross-solution.de>
+ */
+
+
+$template = $this->job->getAttachedEntity('gastro24-template');
+$basePathHelper = $this->plugin('basePath');
+$replaceImage = function($str) use ($template, $basePathHelper)
+{
+    $image = $template ? $template->getImage() : null;
+    if ($image) {
+        $imageUri = $basePathHelper($image->getUri());
+        $imageHtml = '<img src="' . $imageUri . '">';
+    } else {
+        $imageHtml = '';
+    }
+
+    return str_replace('#image#', $imageHtml, $str);
+};
+
+$orgName = $this->jobOrganizationName($this->job);
+
+
+
+
+?>
+<?=$this->jsonLd($this->job)?>
+  <style>
+  .link-tag:hover, .link-tag.active {
+    background-color: #4e4e4e;
+  }
+  .link-tag, .link-tag:visited {
+    display: inline-block;
+    padding: 2px 10px;
+    line-height: 23px;
+    border: 0;
+    border-radius: 13px;
+    color: #fff;
+    background-color: #6f6f6f;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .list-no-style, .ui-autocomplete {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .list-no-style li {
+    display: inline;
+  }
+  </style>
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+
+     <?php /* Bannerbild */ ?>
+
+        <?php if ($template && ($image = $template->getImage())):?>
+        
+                <div class="row text-center">
+                    <img style="width:100%; margin-bottom:15px;margin-top:-15px" src="<?=$this->basePath($image->getUri())?>">
+                </div>
+            
+        <?php endif ?>
+
+        <?php /* Stellenbeschreibung */ ?>
+
+        <div class="row">
+
+            <?php if ($this->html): ?>
+                 <div class="col-md-12 position">
+                   <?=$this->html?>
+                 </div>
+            <?php else: ?>
+              <div class="col-md-12 position">
+                <?= $replaceImage($this->job->getTemplateValues()->get('position'));?>
+              </div>
+
+              <?php  /* Anforderungen */ ?>
+              <div class="col-md-12 position">
+                <?php if($this->benefits): ?>
+                  <div><b><?=$this->labelRequirements?></b></div>
+                <?php endif;?>
+                <?=$this->requirements;?>
+              </div>
+
+              <?php if ($this->qualifications): ?>
+                <div class="col-md-12 position">
+                  <div><b><?=$this->labelQualifications?></b></div>
+                  <?=$this->qualifications;?>
+                </div>
+              <?php endif;?>
+
+              <?php if ($this->benefits): ?>
+                <div class="col-md-12 position">
+                  <div><b><?=$this->labelBenefits?></b></div>
+                  <?=$this->benefits;?>
+                </div>
+              <?php endif;?>
+            <?php endif; ?>
+
+
+
+        </div>
+
+
+        <?php /* Unternehmensbeschreibung */ ?>
+        <hr />
+        <p ><?=($org = $this->job->getOrganization()) && ($desc = $org->getDescription()) ? $desc : $this->descriptionEditable ?></p>
+            <div itemscope itemtype="http://schema.org/Organization">
+                <strong itemprop="name">
+                    <?= $this->organizationName?>
+                </strong><br/>
+                <?php if ($this->street || $this->postalCode || $this->city || $this->phone):?>
+                <address itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                    <?php if ($this->street): ?><span itemprop="streetAddress"><?=$this->street?></span><br><?php endif ?>
+                    <?php if ($this->postalCode): ?><span itemprop="postalCode"><?=$this->postalCode?></span><?php endif ?>
+                    <?php if ($this->city): ?><span itemprop="addressLocality"><?=$this->city?></span><br /><?php endif ?>
+                    <?php if ($this->phone): ?>Telefon: <span itemprop="telephone"><?=$this->phone?></span><br /><?php endif ?>
+                    <?php if ($this->fax): ?>Fax: <?=$this->fax?></span><br /><?php endif ?>
+                </address>
+                <?php endif?>
+            </div>
+
+   </div>
+</div>
+
+  <div class="panel panel-default"> 
+      <div class="panel-body"> 
+         <div id="share" class="pull-left round-shares"></div>
+           <div class="pull-right" style="margin-top:7px">
+           <?=$this->gastroApplyUrl($job);?> 
+           
+    </div>
+       </div>
+   </div>
+
+
+  
+    
+    
+     <style>
+       
+       
+.jssocials-share-whatsapp .jssocials-share-link,
+.jssocials-share-facebook .jssocials-share-link,
+.jssocials-share-email .jssocials-share-link,
+.jssocials-share-twitter .jssocials-share-link
+    {
+    background: #ccc;
+}
+
+.jssocials-shares a {
+    
+    color:#fff!important;
+}
+
+
+    </style>
+    
+
+            <script src="/modules/JobsFrankfurt/jssocials-1.4.0/dist/jssocials.js"></script>
+            <script>
+                $("#share").jsSocials({
+                    showLabel: false,
+                    showCount: true,
+                    shares: ["email", "twitter", "facebook", "whatsapp"]
+                });
+            </script>
+    
+    
+  </div>
+
+<!-- ENDE COL MD 9-->
+
+<div class="col-md-3">
+  <div class="panel panel-default">
+    <div class="panel-body">
+        
+   <?php /* Firmenlogo */ ?>
+
+                <div itemprop="logo" style="text-align:center; margin-bottom:15px">
+                    <div  style=" 
+                      margin: 0 auto;
+                      width: 115px;
+                      height: 115px;   
+                      transition: border .2s ease-in-out;
+                      position: relative;
+                      display: block;
+                      padding: 4px;
+                      line-height: 1.5;
+                      background-color: #fff;
+                      border: 1px solid #ddd;
+                      border-radius: 3px;
+                    overflow: hidden;">
+                         <img style="
+                         margin-bottom: auto;
+                         text-align: center;
+                         width: 65%;
+                         position: absolute;
+                         top: 5%;
+                         bottom: 5%;
+                         left: 5%;
+                         right: 5%;
+                         margin: auto;" src="<?= $template && ($logo = $template->getLogo())
+                        ? $this->basePath($logo->getUri())
+                        : $this->uriLogo?>" alt="<?= $this->organizationName?>">
+                   </div>
+                    
+              
+                
+                <h2 class="text-center"><?= $orgName ?></h2>
+
+
+                    <?php if ($org = $this->job->getOrganization()): ?>
+                        <div style="margin-bottom:5px" class=""><a title="Aktuelle Jobs bei <?= $this->organizationName?>" href="<?= $this->orgProfileUrl($org)?>?clear=1" class="btn btn-default btn-block company-jobs-btn"><strong>Firmenprofil</strong></a></div>
+                    <?php endif ?>
+
+       </div>
+    </div>
+</div>
+
+

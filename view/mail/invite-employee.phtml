@@ -1,0 +1,127 @@
+<?php
+/**
+ * YAWIK
+ *
+ * @filesource
+ * @license MIT
+ * @copyright  2013 - 2015 Cross Solution <http://cross-solution.de>
+ */
+
+  /*
+   * Available Variables:
+   *
+   * string $inviter          Name of inviter or his/her email address
+   * string $organization     Name of the organization to which the invitation is made
+   * string $token            Confirmation token
+   * string $user             User who gets invited
+   * boolean $hasAssociation  Wether or not the user is already assigned to an organization.
+   *
+   * If $hasAssociation is TRUE, the following variables are available:
+   *
+   * boolean $isOwner         Wether or not the user is the owner of his/her associated organization
+   * string  $currentOrganization The name of the current organization.
+   *
+   */
+?>
+<?= $this->partial('mail/header', [
+            'title' => 'Einladung ins Firmen-Team',
+            'width'=>$width, 'mail_blue_color'=>$mail_blue_color,
+            'mail_white_color' => $mail_white_color]); ?>
+ <tr>
+	 <td align="center" valign="top">
+									<!-- CENTERING TABLE // -->
+									<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#FFF">
+										<tbody><tr>
+											<td align="center" valign="top">
+												<!-- FLEXIBLE CONTAINER // -->
+												<table border="0" cellpadding="0" cellspacing="0" width="500" class="flexibleContainer">
+													<tbody><tr>
+														<td align="center" valign="top" width="500" class="flexibleContainerCell">
+															<table border="0" cellpadding="30" cellspacing="0" width="100%">
+																<tbody><tr>
+																	<td align="center" valign="top">
+
+																		<!-- CONTENT TABLE // -->
+																		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+																			<tbody><tr>
+																				<td valign="top" class="textContent">
+																					
+<h3 mc:edit="header" style="color:#22436c;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:bold;margin-top:0;margin-bottom:3px;text-align:left;">
+  <?php if ($this->user): echo sprintf($this->translate('Hello %s'), $this->user);
+         else: echo $this->translate('Hello');
+         endif;?>,
+</h3>
+<div mc:edit="body" style="text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;margin-bottom:0;color:#5F5F5F;line-height:135%;">
+<?= sprintf($this->translate('%s invited you to join the team of %s'), $this->inviter, $this->organization) ?>
+																					  
+	
+
+																					    </div>
+																				</td>
+																			</tr>
+																		</tbody></table>
+																		<!-- // CONTENT TABLE -->
+
+																	</td>
+																</tr>
+															</tbody></table>
+														</td>
+													</tr>
+												</tbody></table>
+												<!-- // FLEXIBLE CONTAINER -->
+											</td>
+										</tr>
+									</tbody></table>
+									<!-- // CENTERING TABLE -->
+								</td>
+							</tr>
+						<!-- MODULE ROW // -->
+							<tr>
+								<td align="center" valign="top">
+									<!-- CENTERING TABLE // -->
+									<table border="0" cellpadding="0" cellspacing="0" width="100%">
+										<tr style="padding-top:0;">
+											<td align="center" valign="top">
+												<!-- FLEXIBLE CONTAINER // -->
+												<table border="0" cellpadding="30" cellspacing="0" width="500" class="flexibleContainer">
+													<tr>
+														<td style="padding-top:0;" align="center" valign="top" width="500" class="flexibleContainerCell">
+
+															<!-- CONTENT TABLE // -->
+															<table border="0" cellpadding="0" cellspacing="0" width="50%" class="emailButton" style="background-color: #243b84;">
+																<tr>
+																	<td align="center" valign="middle" class="buttonContent" style="padding-top:15px;padding-bottom:15px;padding-right:15px;padding-left:15px;">
+<a style="color:#FFFFFF;text-decoration:none;font-family:Helvetica,Arial,sans-serif;font-size:20px;line-height:135%;" href="<?= $this->link($this->serverUrl($this->url)) ?>" target="_blank">Einladung akzeptieren</a>
+																	</td>
+																	
+																																					  <?php if ($this->hasAssociation): ?>
+    <?php if ($this->isOwner):
+        echo sprintf(
+           $this->translate('<strong>Please note: </strong> You are currently the owner of <b>%s</b>. Accepting this invitation will delete your organization.'),
+           $this->currentOrganization
+        );
+
+        else:
+            echo sprintf(
+                    $this->translate('<strong>Please note: </strong> You are currently assigned as an employee to <b>%s</b>. Accepting this invitation will remove this association.'),
+                    $this->currentOrganization
+                 );
+        endif; ?>
+
+<?php endif ?>
+																</tr>
+															</table>
+															<!-- // CONTENT TABLE -->
+
+														</td>
+													</tr>
+												</table>
+												<!-- // FLEXIBLE CONTAINER -->
+											</td>
+										</tr>
+									</table>
+									<!-- // CENTERING TABLE -->
+								</td>
+							</tr>
+							<!-- // MODULE ROW -->
+<?= $this->partial('mail/footer', ['width' => $width, 'mail_white_color' => $mail_white_color]); ?>

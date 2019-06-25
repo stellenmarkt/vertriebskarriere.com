@@ -1,0 +1,166 @@
+<?php
+$this->headTitle("Aktuelle Jobs bei ".$this->organization->getName());
+$this->headScript()->appendFile($this->basePath('modules/Core/js/core.pagination-container.js'));
+$this->headScript()->appendFile($this->basePath('modules/Core/js/core.pagination.js'));
+/* @var \Organizations\Entity\Organization $organization */
+$contact = $organization->getContact();
+?>
+<style>
+    
+main .nav>li>a {
+     position: relative;
+    display: block;
+    padding: 15px 5px;
+    margin-left: 15px;
+}
+
+main .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+    /* color: #555; */
+    background-color: #fff;
+    border-bottom: 2px solid #ddd;
+    border-bottom-color: #243b84;
+    cursor: default;
+    border-top:none;
+     border-left:none;
+      border-right:none;
+}
+main .nav-tabs>li>a:hover {
+    border-color: transparent;
+}
+
+.organizationtitle {
+    
+    border-bottom: 1px solid #dcdfe2;
+    padding: 0 15px;
+    background-color: #f5f5f5;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+
+
+</style>
+
+<div class="row">
+    <div class="col-md-12">
+       <div class="panel panel-default">
+           <div class="panel-body">
+               <div class="row">
+                <div class="col-md-2">
+                    <div style="margin-top:20px">
+                        
+                        <?php if($organization->getImages()->notEmpty('images')): ?>
+                          <img src="<?php echo $this->basePath($this->organizationImageCache->getUri($organization->getImages()->get('thumbnail'))) ?>">
+                            <?php else: ?>
+                             <span class="yk-icon fa-file-image-o fa-5x"></span>
+                           <?php endif;?>
+                    </div>
+ 
+                </div>
+                
+                 <div class="col-md-10">
+                      <h1 style="font-weight:700;"><?php echo $organization->getName()?></h1>
+                      <p><?php echo $contact->getPostalcode()?> <?php echo $contact->getCity()?> </p>
+                 </div>
+               </div>   
+           </div>
+           
+           <div style="border-top: 1px solid #dcdfe2;">
+               
+                  <ul class="nav nav-tabs" style="border-bottom:1px solid transparent">
+			         <li>
+                       <a href="#profil" data-toggle="tab">Firmenprofil</a>
+		             </li>
+			         <li class="active">
+			            <a href="#jobs" data-toggle="tab">Jobs <span class="badge" style="background-color: #243b84;"><?=$this->jobs->getTotalItemCount()?></span></a>
+		           	</li>
+		           	 <li>
+			            <a href="#rating" data-toggle="tab">Bewertung abgeben</a>
+		           	</li>
+		           	
+		          </ul>
+ 
+           </div>
+           
+       </div>
+       <div class="tab-content ">
+			  <div class="tab-pane row" id="profil">
+			      <div class="col-md-8">
+			            <?php if($organization->getdescription()): ?>
+                        
+                         <div class="panel panel-default">
+			               <h4 class="organizationtitle">Über uns</h4>
+			               <div class="panel-body">
+                            <p><?php echo $organization->getdescription()?></p>
+      			          </div>
+			             </div> 
+                       <?php else: ?>
+                       <?php endif;?>
+                       
+                       
+                    <?php if($contact->getStreet()): ?>
+                        
+                      <div class="panel panel-default">
+			           <h4 class="organizationtitle">Adresse</h4>
+			             <div class="panel-body">
+			            
+			             
+       
+                             <address style="margin-bottom:0px;">
+                                <?php echo $contact->getStreet()?> <?php echo $contact->getHouseNumber()?><br/>
+                                <?php echo $contact->getPostalcode()?> <?php echo $contact->getCity()?> <br/>
+                                <?php if ($contact->getCountry()): ?><?php echo $contact->getCountry()?><br/> <?php endif ?>
+                                <?php if ($contact->getPhone()): ?><?php echo is_null($contact->getPhone()) ? "":"Telefon: ".$contact->getPhone()."<br/>" ?><?php endif ?>
+                                <?php if ($contact->getFax()): ?><?php echo is_null($contact->getFax()) ? "":"Fax: ".$contact->getFax()."<br/>" ?><?php endif ?>
+                             </address>
+			        </div>
+			        
+			          
+			       </div>
+                      
+                      
+                       <?php else: ?>
+                       <?php endif;?>
+                       
+                       
+                     <?php if($contact->getStreet()): ?>
+                    
+                       <div class="panel panel-default">
+			               <h4 class="organizationtitle">Standort</h4>
+			            
+			        <iframe width="100%" height="450" src="https://maps.google.com/maps?width=100%&amp;height=450&amp;hl=de&amp;q=1%20<?php echo $organization->getName()?>+<?php echo $contact->getStreet()?>+<?php echo $contact->getHouseNumber()?>+<?php echo $contact->getCity()?>>+<?php echo $contact->getCountry()?>&amp;ie=UTF8&amp;t=&amp;z=16&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+</iframe>
+
+			          
+			         </div> 
+                       <?php else: ?>
+                       <?php endif;?>
+
+			      </div>
+				</div>
+				<div class="tab-pane active" id="jobs">
+				    
+				    
+                        <div id="jobs-list-container" class="pagination-container">
+                            <div class="pagination-content">
+                                <?php echo $this->render('organizations/profile/detail.ajax')?>
+                            </div>
+                        </div>
+
+
+				</div>
+				
+				<div class="tab-pane" id="rating">
+				    <div class="panel panel-default">
+				        <h4 class="organizationtitle">Bewerten Sie diesen Arbeitgeber</h4>
+				         <div class="panel-body">
+				            
+				            <p>Bald können Sie <?php echo $organization->getName()?> hier bewerten.</p>
+				        </div>
+				      </div>
+				</div>
+			</div>
+  </div> 
+</div>

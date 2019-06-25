@@ -1,0 +1,377 @@
+<?php
+/**
+ * YAWIK
+ *
+ * @filesource
+ * @license MIT
+ * @copyright  2013 - 2018 Cross Solution <http://cross-solution.de>
+ *
+ * Variables:
+ *             $job         JobInterface    Job Entity
+ *             $isVisited   bool            Has the user already visited this job in the current session
+ */
+
+if ($this->isIntern):
+         $this->headMeta()->setName('robots', 'index,follow');
+//  elseif(!$this->isIntern):
+elseif(!$this->isIntern && !$this->isEmbeddable):
+          $this->headMeta()->setName('robots', 'noindex,follow');
+endif;
+
+
+
+//$this->headTitle($this->job->getTitle());
+
+$this->headTitle($this->job->getTitle()." von ".$this->jobOrganizationName($this->job));
+
+
+$link = $this->job->getLink();
+
+//if (!$link) {
+//    $link = $this->jobUrl($job, ['preview' => true, 'linkOnly' => true]);
+//    $this->isEmbeddable = true;
+//}
+
+if (!$this->isIntern && !$this->isVisited && !$this->isEmbeddable):
+$this->headScript()->captureStart();?>
+;(function($, w) {
+    $(function() {
+        w.setTimeout(
+            function() { w.location.href='<?=$this->job->getLink()?>'; },
+            3000
+        );
+    });
+})(jQuery, window);
+<?php $this->headScript()->captureEnd();
+endif;
+$this->headScript()->appendFile($this->basePath('modules/JobsFrankfurt/js/jobs.js'))
+    ->appendFile($this->basePath('/dist/js/bootstrap-dialog.min.js'));;
+$orgName = $this->jobOrganizationName($this->job);
+?>
+<div class="row">
+ <div class="col-md-9">
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+         <h6 style="color:#31b0d5; text-transform:uppercase; margin-bottom:5px" class="h3"><?= $orgName ?></h6>
+         <h1 style="margin-top:0px;font-size: 30px;font-weight: 700;"> <?=$this->job->getTitle()?></h1>
+
+     <p> Publiziert am:
+
+                        <?php
+                        if ($job->getDatePublishStart()): echo $this->dateFormat($job->getDatePublishStart(), 'short', 'none');
+                        elseif ($job->getDateCreated()): echo $this->dateFormat($job->getDateCreated(), 'short', 'none');
+                        endif?>
+
+
+         | <?php $location = $job->getLocations()->current();
+            echo $location ? $location->getCity() : preg_replace('~\(.*?\)$~', '', (string) $job->getLocation());?> |
+                        <?php $typeOfContract = $job->getClassifications()->getEmploymentTypes()->__toString() ?:'Vollzeit' ?>
+                        <span class="yk-contract yk-<?=$typeOfContract?>"><?=$typeOfContract; ?></span>
+
+          </p>
+
+           <?=$this->gastroApplyUrl($job);?>
+
+    </div>
+</div>
+    <?php if (!$this->isIntern && $this->isVisited && !$this->isEmbeddable): ?>
+         <div class="panel panel-default">
+                 <div class="panel-body">
+                        <p> Sie haben sich diese Stellenanzeige bereits angesehen.</p>
+                        <p><a style="text-decoration:underline" href="<?=$this->job->getLink()?>">&raquo; Direkt zum Inserat</a></p>
+                 </div>
+         </div>
+ <?php elseif (!$this->isIntern && !$this->isEmbeddable): ?>
+
+<style>
+
+ .spinner {
+  margin: 0 auto;
+  width: 70px;
+  text-align: center;
+}
+
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #333;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 40% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}
+
+</style>
+<div class="panel panel-default">
+    <div class="panel-body">
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+             </div>
+             <br /><br />
+             <p style="text-align:center;">Sie werden in Kürze automatisch auf das Job-Inserat von <?=$orgName?> weitergeleitet...</p>
+    </div>
+</div>
+
+<?php endif ?>
+
+
+
+
+
+
+<?php if (!$this->isIntern && $this->isEmbeddable):?>
+
+
+
+<style>
+#preload {
+
+
+    background-color:#fff;
+    padding:100px 0;
+}
+
+  .frame-content {
+
+
+  width: 100%;
+
+
+    }
+
+.frame-content iframe {
+
+ background-color:#fff;
+  width:100%;
+  height:1800px;
+ overflow:auto;
+
+    }
+
+   .spinner {
+  margin: 0 auto;
+  width: 70px;
+  text-align: center;
+}
+
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #333;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 40% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}
+
+</style>
+
+
+<script type="text/javascript">
+$(function(){var d=15,a=$("#preload").removeClass("hidden"),e=$(".frame-content iframe").addClass("hidden"),c=$(window),g=$("header"),f=$("footer"),b=$(".box.intro");setTimeout(function(){a.addClass("hidden");e.removeClass("hidden")},3000);c.resize(function(){e.height(c.height()-g.outerHeight(true)-f.outerHeight(true)-b.outerHeight(true)-d)}).resize()});
+</script>
+<!--PRELOAD<script>
+function setIframeSrc() {
+  var s = "<?=$this->job->getLink()?>";
+  var iframe1 = document.getElementById('iframe1');
+  if ( -1 == navigator.userAgent.indexOf("MSIE") ) {
+    iframe1.src = s;
+  }
+  else {
+    iframe1.location = s;
+  }
+}
+setTimeout(setIframeSrc, 5);
+</script>-->
+<div class="panel panel-default hidden-sm hidden-md hidden-lg text-center">
+    <div class="panel-body">
+          <a href="<?=$this->job->getLink()?>">&raquo; Direkt zum Inserat</a>
+    </div>
+</div>
+<div class="hidden-xs frame-content">
+      <div id="preload" class="loading hidden text-center panel panel-default">
+         <div class="spinner"><div class="bounce1"></div> <div class="bounce2"></div><div class="bounce3"></div></div>
+         <p>Das Inserat wird geladen, bitte haben Sie einem Moment Geduld</p>
+      </div>
+   <iframe class="panel panel-default" id="iframe1" title="<?=$this->job->getTitle()?>" frameborder="0" allowfullscreen src="<?=$link?>"></iframe>
+</div>
+
+  <div class="panel panel-default">
+      <div class="panel-body">
+         <div id="share" class="text-center round-shares"></div>
+       </div >
+   </div>
+ <style>
+
+
+.jssocials-share-whatsapp .jssocials-share-link,
+.jssocials-share-facebook .jssocials-share-link,
+.jssocials-share-email .jssocials-share-link,
+.jssocials-share-twitter .jssocials-share-link
+    {
+    background: #ccc;
+}
+
+.jssocials-shares a {
+
+    color:#fff!important;
+}
+
+
+    </style>
+
+
+            <script src="/modules/JobsFrankfurt/jssocials-1.4.0/dist/jssocials.js"></script>
+            <script>
+                $("#share").jsSocials({
+                    showLabel: false,
+                    showCount: true,
+                    shares: ["email", "twitter", "facebook", "whatsapp"]
+                });
+            </script>
+
+
+
+
+
+      </div>
+<div class="col-md-3">
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+
+   <?php /* Firmenlogo */ ?>
+
+
+   <?php if ($logo = $this->gastroLogoUri($job)): ?>
+
+     <div itemprop="logo" style="text-align:center; margin-bottom:15px">
+                    <div style="
+                      margin: 0 auto;
+                      width: 115px;
+                      height: 115px;
+                      transition: border .2s ease-in-out;
+                      position: relative;
+                      display: block;
+                      padding: 4px;
+                      line-height: 1.5;
+                      background-color: #fff;
+                      border: 1px solid #ddd;
+                      border-radius: 3px;
+                    overflow: hidden;">
+                         <img style="
+                         margin-bottom: auto;
+                         text-align: center;
+                         width: 65%;
+                         position: absolute;
+                         top: 5%;
+                         bottom: 5%;
+                         left: 5%;
+                         right: 5%;
+                         margin: auto;" src="<?= $this->gastroLogoUri($this->job)?>" alt="<?= $orgName ?>">
+                   </div>
+       </div>
+
+ <?php   endif; ?>
+
+
+              <h2 class="text-center"><?= $orgName ?></h2>
+
+                <?php if ($org = $this->job->getOrganization()): ?>
+             <div style="margin-bottom:5px" class=""><a href="<?= $this->orgProfileUrl($org)?>?clear=1" class="btn btn-default btn-block company-jobs-btn"><strong>Firmenprofil</strong></a></div>
+                <?php endif ?>
+            <!--<div class=""><a href="" class="btn btn-default btn-block company-jobs-btn">3 Jobs</a></div>-->
+
+
+
+       </div>
+    </div>
+</div>
+</div>
+
+
+
+<?php endif; ?>
+
+
+
+
+
+<?php if ($this->isIntern):?>
+
+            <?=$this->internalJob?>
+
+
+
+<?php endif ?>
+
+
+
+
+<div class="modal fade" id="job-apply-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" style="width: 90%; max-width:1200px; height: 90%" role="document">
+        <div class="modal-content" style="height: 100%">
+            <div class="modal-body" style="height: calc(100% - 65px)">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Schliessen</button>
+            </div>
+        </div>
+    </div>

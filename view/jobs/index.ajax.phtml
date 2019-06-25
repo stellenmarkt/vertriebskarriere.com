@@ -1,0 +1,206 @@
+<?php
+/**
+ * YAWIK
+ *
+ * @filesource
+ * @copyright (c) 2013 - 2016 Cross Solution (http://cross-solution.de)
+ * @license   MIT
+ */
+if (count($jobs)): // We only want to render something, if there are items.
+?><div class="hidden" id="update-job-count"><?=$this->jobs->getTotalItemCount()?></div><?php
+$hasFacets = $jobs instanceof \Solr\FacetsProviderInterface;
+
+$queryGet = $this->params()->fromQuery();
+unset($queryGet['clear']);
+$query = $this->params()->fromRoute('wpId') ?: (count($queryGet) ? 0 : 304);
+$wordpress = $this->proxy('wordpress');
+
+$this->headMeta()->setName('description', $wordpress->chain(['page' => $query, 'value' => 'meta-fields.description'], ''));
+$this->headMeta()->setName('keywords', $wordpress->call('value', ['meta-fields.keywords'], ''));
+$description = $wordpress->call('value', ['content.rendered'], '');
+
+
+?>
+<style>
+  @media (min-width: 992px) {
+    .collapse.dont-collapse-sm {
+      display: block;
+      height: auto !important;
+      visibility: visible;
+    }
+  }
+</style>
+
+
+    <div class="col-md-3">
+        <div style="margin-bottom:15px">
+            <strong class="h2" style="color:#22436c"><?=$this->jobs->getTotalItemCount()?> Treffer für</strong>
+            <h1 style="display:inline;color:#22436c" class="h2">
+                <?=$wordpress->call('value', ['title.rendered'], '') ?: (count($this->jobs) ? 'Ihre Job-Suche' : 'Leider keine passenden Jobs gefunden'); ?>
+            </h1>
+
+                         <?php $parts=preg_split('~<!--more-->~' , $description);?>
+           <?php if (isset($parts[1]) && "" != trim($parts[1])): ?>
+            <p><?= $parts[1] ?></p>
+
+
+            <?php endif ?>
+
+	  </div>
+	<?php if ($hasFacets):
+    if ($this->params()->fromRoute('isLandingPage')):?>
+        <span class="facets-url" data-url="<?=$this->url('lang/landingPage', ['q' => $this->params()->fromRoute('term'), 'format' => 'html'], true)?>"></span>
+    <?php endif;
+    $facets = $jobs->getFacets();
+    ?>
+
+
+    <?=$this->proxy('jobsByMailSubscriptionForm')->render($jobs)?>
+
+    <div class="panel-group collapse dont-collapse-sm">
+
+        <?php $facetsHtml = ''; $isFirstFacet = true; $atLeastOneTotalActive = false; foreach ($facets as $facetName => $facetValues):?>
+            <?php if(count($facetValues)>0): $atLeastOneActive = false; $facetsList = []; ob_start();?>
+            <div id="facets-box-<?=$facetName?>" class="panel panel-default">
+                <div class="panel-heading">
+                    <a class="<?=$isFirstFacet ?  '%firstCollapsed% ' : '%collapsed%'?>" style="display:block;width: 100%;text-decoration:none;" data-toggle="collapse" data-parent="#facets-box-<?=$facetName?>" href="#facets-box-<?=$facetName?>-content">
+                    <?=$this->translate($facets->getTitle($facetName))?>
+                        <span class="small">%facetsList%</span>
+                    </a>
+
+                </div>
+                <div id="facets-box-<?=$facetName?>-content" class="panel-collapse collapse <?=$isFirstFacet ? '%firstIn%' : '%in%' ?>">
+                <div class="panel-body">
+                    <?php foreach ($facetValues as $facetValue => $facetValueCount):
+                        $activeFacet = $facets->isValueActive($facetName, $facetValue);
+                        $atLeastOneActive = $atLeastOneActive || $activeFacet;?>
+                        <div>
+                            <label<?=$activeFacet ? ' class="text-primary"' : ''?>>
+                                <input type="checkbox" name="<?=$this->escapeHtmlAttr($facetName)?>[<?=$this->escapeHtmlAttr($facetValue)?>]"
+                                       class="facet-checkbox"<?=$activeFacet?" checked":""?>>
+                                <?=$facetValue?> (<?=$facetValueCount?>)
+                            </label>
+                        </div>
+                    <?php if ($activeFacet): $facetsList[] = $facetValue; endif; endforeach;?>
+                </div>
+                </div> <!-- facets-collaps-* -->
+            </div>
+            <?php $facetsHtml .= str_replace(
+                    ['%in%', '%firstIn%', '%firstCollapsed%', '%collapsed%', '%facetsList%' ],
+                    [
+                            $atLeastOneActive ? 'in' : '',
+                            $atLeastOneActive ? 'in' : '%firstIn%',
+                            $atLeastOneActive ? '' : '%firstCollapsed%',
+                            $atLeastOneActive ? '' : 'collapsed',
+                            join(', ', $facetsList),
+                    ],
+                    ob_get_clean()
+                ); $atLeastOneTotalActive = $atLeastOneTotalActive || $atLeastOneActive; endif; $isFirstFacet = false;?>
+        <?php endforeach;
+            echo str_replace(
+                    ['%firstCollapsed%', '%firstIn%'],
+                    [$atLeastOneTotalActive ? 'collapsed' : '', $atLeastOneTotalActive ? '' : 'in'],
+                    $facetsHtml
+            );
+        ?>
+
+        <div class="panel panel-default">
+                <div class="panel-body">
+                    <button id="facets-apply" class="btn btn-primary">Filter anwenden</button>
+                    <button id="facets-reset" class="btn btn-default pull-right">Löschen</button>
+                </div>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="col-md-9">
+        <div class="row">
+
+
+
+
+      <?php endif;?>
+
+
+
+    <div class="row-eq-height">
+    <?php foreach ($jobs as $job): /* @var \Jobs\Entity\Job $job */ ?>
+    <?php
+
+    $org = $job->getOrganization();
+    $href = $this->jobUrl($job, ['linkOnly' => true]);
+
+    ?>
+    <div class="col-md-4 col-sm-6 col-xs-12">
+        <div class="featured-image-box">
+            <div class="img-box">
+                <a href="<?=$href?>" rel="nofollow" target="_blank">
+                <?php
+                $logo = $this->gastroLogoUri($job);
+                if ($logo) {
+                    echo '<img class="yk-logo-sm center-block" src="' . $logo . '">';
+                }
+
+                ?>
+                </a>
+            </div>
+            <div class="content-area">
+                <div class="top-cnt">
+
+                    <h4>
+                        <a title="<?=strip_tags($job->getTitle())?>"
+                           href="<?=$href?>" ref="nofollow" target="_blank">
+                            <?=strip_tags($job->getTitle())?>
+                        </a>
+                    </h4>
+                    <p>
+                    <?php
+
+                    if ($org && $org->getOrganizationName() && $org->getOrganizationName()->getName()) {
+                       if (\Organizations\Entity\Organization::PROFILE_DISABLED !== $org->getProfileSetting()) {
+
+                              echo sprintf('<a href="%s?clear=1">%s</a>',
+                                $this->orgProfileUrl($org),
+                                $org->getOrganizationName()->getName());
+
+                        } else {
+                           echo $org->getOrganizationName()->getName();
+
+                        }
+                    } else if ($job->getCompany()) {
+                        echo $job->getCompany();
+                    }
+                    ?>
+                    </p>
+               <!--     <p>
+                        <?php $typeOfContract = $job->getClassifications()->getEmploymentTypes()->__toString()?:'Vollzeit' ?>
+                        <span class="yk-contract yk-<?=$typeOfContract?>"><?=$typeOfContract; ?></span>
+                    </p>-->
+                   <p> Publiziert am:
+                        <?php
+                        if ($job->getDatePublishStart()): echo $this->dateFormat($job->getDatePublishStart(), 'short', 'none');
+                        elseif ($job->getDateCreated()): echo $this->dateFormat($job->getDateCreated(), 'short', 'none');
+                        endif?>
+                    <br /><?=preg_replace('~\(.*?\)$~', '', (string) $job->getLocation())?> </p>
+
+                </div>
+            </div>
+        </div>
+
+     </div>
+    <?php endforeach?>
+
+    </div>
+
+        </div>
+        <?= $this->paginationControl($jobs, 'Sliding', 'pagination-control',
+                                     [
+                                         'lang' => $this->params('lang'),
+                                         'route' => 'lang/jobboard'
+                                     ]);
+        ?>
+
+    </div>
+        <?=$hasFacets ? '</div>' : '' ?>
+<?php endif ?>

@@ -1,0 +1,75 @@
+<?php
+/**
+ * YAWIK
+ *
+ * General layout template file. Defines the general layout.
+ *
+ * @copyright (c) 2013 - 2016 Cross Solution (http://cross-solution.de)
+ * @license   MIT
+ */
+
+/* @var $options \Core\Options\ModuleOptions */
+$options = $this->services('Core/Options');
+$languages = $options->getSupportedLanguages();
+
+// See: http://yawik.readthedocs.org/en/latest/modules/core/notifications.html
+
+$notifications = $this->partial('core/notifications');
+
+// set default page title
+
+$this->headTitle($this->translate('Jobs-Frankfurt.com'))->setSeparator(' - ')->setAutoEscape(false);
+
+// set default keywords
+
+$this->headMeta()->setCharset("utf-8");
+$this->headMeta()->appendName("keywords", "Open Surce Bewerbermanagement System, Bewerberverwaltung");
+$this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0');
+
+$this->configHeadScript()->setAllowArbitraryAttributes(true);
+$this->configHeadScript()->prependScript('var lang="' . $lang . '";'
+                                         . 'var basePath="' . $this->basePath() . '";');
+
+$this->headLink()->prependStylesheet($this->basePath() . '/modules/JobsFrankfurt/Stellenmarkt.css');
+$this->headLink()->prependStylesheet($this->basePath('dist/css/core.min.css'));
+$this->configHeadScript()->prependFile($this->basepath('dist/js/core.js'));
+$this->configHeadScript()->appendFile($this->basePath('modules/JobsFrankfurt/js/jquery.matchHeight.js'))->appendFile($this->basePath('modules/JobsFrankfurt/js/index.js'));
+
+$langScript = 'dist/locales/' . $lang . '.js';
+$this->configHeadScript()->appendFile($this->basePath($langScript));
+
+foreach ($languages as $lang) {
+    $this->headLink()->appendAlternate(
+        preg_replace('~^'.$this->basepath('/'.$this->params('lang')).'~',
+            $this->basepath('/'.$lang),$_SERVER['REQUEST_URI']),
+        'hreflang',
+        $this->headTitle()->setTranslator()->renderTitle() ,
+        array('hreflang'=>$lang));
+}
+?>
+<?php echo $this->doctype(); ?>
+<html lang="<?=$this->params('lang') ?>">
+<head>
+    <?=$this->headTitle() ?>
+    <?=$this->headMeta() ?>
+    <?=$this->configHeadScript() ?>
+    <?=$this->headLink() ?>
+    <?=$this->headStyle() ?>
+    <style type="text/css">
+    .container { width: 100% !important; }
+    </style>
+
+</head>
+<body>
+<div class="container">
+<main id="content" class="row col-md-12">
+    <div class="container">
+    <?=$notifications?>
+    <?=$this->content;?>
+    </div>
+</main>
+</div>
+<!-- /container -->
+
+</body>
+</html>

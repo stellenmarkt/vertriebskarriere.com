@@ -1,0 +1,20 @@
+<?php $this->headTitle($this->translate("Reset your password")); ?>
+    <h1>Passwort vergessen</h1>
+    <hr />
+<?php
+/** @var \Auth\Form\ForgotPassword $form */
+$form = $this->form;
+$form->setIsDescriptionsEnabled(true);
+$form->setDescription($this->translate('Please enter your username or email address. You will receive a link to create a new password via email.'));
+$form->setLabel("Reset your password");
+$form->setAttribute('action', $this->url('lang/forgot-password'));
+?>
+<style>
+    
+    .form-headline {
+        
+        display:none;
+    }
+</style>
+
+<?php echo $this->form($form); ?>
