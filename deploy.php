@@ -4,10 +4,10 @@ namespace Deployer;
 require 'recipe/zend_framework.php';
 
 // Project name
-set('application', 'vertriebskarriere.com');
+set('application', 'vertriebskarriere.com-');
 
 // Project repository
-set('repository', 'git@gitlab.cross-solution.de:yawik-modules/vertriebskarriere.com.git');
+set('repository', 'git@gitlab.cross-solution.de:yawik-modules/vertriebskarriere.com-.git');
 
 // Shared files/dirs between deploys 
 add('shared_files', [
