@@ -18,7 +18,7 @@ $notifications = $this->partial('core/notifications');
 
 // set default page title
 
-$this->headTitle($this->translate('Gesundheeitsstellenmarkt.de'))->setSeparator(' | ')->setAutoEscape(false);
+$this->headTitle($this->translate('Vertriebskarriere.de'))->setSeparator(' | ')->setAutoEscape(false);
 
 // set default keywords
 
@@ -166,9 +166,7 @@ $this->configHeadScript()->appendScript('var lang="' . $this->params('lang') . '
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                    <a class="navbar-brand menu-logo headliner" href="/de">
-                        GESUNDHEITSSTELLENMARKT.de
-                    </a>
+                    <img src="<?php echo $this->basepath('/modules/JobsFrankfurt/logo-stellen.png') ?>" alt="Jobs in Frankfurt" class="menu-logo">
                  </div>
             <nav id="main-navigation" class="navbar-collapse collapse navbar-collapse" role="navigation">
 
