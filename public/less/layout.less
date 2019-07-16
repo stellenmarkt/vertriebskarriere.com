@@ -1,4 +1,4 @@
-@import "../../../modules/Core/less/yawik.less";
+@import "../../../modules/Core/less/yawik-core.less";
 @brand-primary: #323493;
 @g24-grey: #242424;
 @g24-white: #ffffff;
@@ -35,6 +35,7 @@
 @yk-tab-color: @brand-primary;
 @yk-tab-active-bg: @brand-primary;
 @yk-tab-active-color: lightgray;
+
 html {
 	height: 100%;
 }
@@ -45,34 +46,13 @@ body {
 	overflow-x: hidden;
 }
 
-h1 {
-	font-weight: 300;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
-	-webkit-hyphens: auto;
-	-moz-hyphens: auto;
-	-ms-hyphens: auto;
-	hyphens: auto;
-}
-
 .featured-image-box {
 	border: 1px solid #ccc;
 	background-color: #fff;
 	margin-bottom: 30px;
 	position: relative;
 	.img-box {
+		float: left;
 		min-height: 1px;
 		position: relative;
 		padding-bottom: 30%;
@@ -121,14 +101,6 @@ h6,
 	margin-top: 0px;
 }
 
-.home #header {
-	left: 0;
-	position: relative;
-	right: 0;
-	top: 0;
-	background-image: linear-gradient( #121212, rgba(0, 0, 0, 0.001));
-}
-
 #form-jobsbymail-subscribe-form {
 	button.btn-info {
 		background-color: @btn-danger-bg;
@@ -160,47 +132,8 @@ h6,
 	}
 }
 
-.frame {
-	padding-bottom: 85%;
-	vertical-align: top;
-	border: 1px solid #DDD;
-	position: relative;
-	min-height: 1px;
-	img {
-		max-height: 100%;
-		max-width: 100%;
-		width: auto;
-		height: auto;
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		margin: auto;
-		padding: 0 10px;
-	}
-}
-
-h2 {
-	margin-bottom: 30px;
-	font-weight: 300;
-}
-
 .text-center {
 	text-align: center;
-}
-
-h3 {
-	font-weight: bold;
-	margin-top: 24px;
-	margin-bottom: 12px;
-}
-
-.h6 {
-	font-weight: bold;
-	margin-top: 24px;
-	margin-bottom: 12px;
-	font-size: 14px;
 }
 
 .wp-content p a {
@@ -218,14 +151,6 @@ main {
 	}
 }
 
-.home #yk-login-info {
-	position: relative;
-	background-color: transparent;
-	.dropdown>a {
-		color: @g24-white;
-	}
-}
-
 .collapsed {
 	background-color: transparent;
 	border-color: @g24-white;
@@ -233,20 +158,6 @@ main {
 	.icon-bar {
 		background-color: @g24-white;
 	}
-}
-
-.home {
-  h1 {
-    color: #fff;
-    font-size: 31px;
-    font-weight: 300;
-  }
-  .navbar-brand {
-	   color: @g24-white;
-  }
-  .navbar-brand {
-	   color: @brand-primary;
-  }
 }
 
 .navbar-brand {
@@ -263,39 +174,24 @@ main {
 // IPad und größer
 @media screen {
 	@media(min-width: @screen-sm) {
-
 		.navbar-header {
 			.menu-logo {
-				width: 290px;
+				width: 295px;
+				position: absolute;
+				top: 50%;
 			}
 		}
-    #wrapper {
-	    text-align: center;
-	    min-height: 600px;
-	    #bg-full {
-	     	position: absolute;
-		    width: 100%;
-	    }
-      .bg-static {
-		    background-image: url(background.jpg);
-		    background-color: #999;
-		    background-size: cover;
-		    background-repeat: no-repeat;
-	  	  background-position: center center;
-	 	    display: block;
-	 	    min-height: 600px;
-	    }
-    }
-
+  
 		.search-form-container {
+			background-image: linear-gradient(#121212, rgba(0,0,0,0.001));
 			input[type=text] {
-				border-top-left-radius: 15px !important;
-				border-bottom-left-radius: 15px !important;
+				border-top-left-radius: 5px !important;
+				border-bottom-left-radius: 5px !important;
 			}
 			.btn-default {
 				width: 25% !important;
-				border-top-right-radius: 15px !important;
-				border-bottom-right-radius: 15px !important;
+				border-top-right-radius: 5px !important;
+				border-bottom-right-radius: 5px !important;
 			}
 			.btn-primary {
 				width: 75% !important;
@@ -303,31 +199,15 @@ main {
 			.container {
 				padding-right: 45px !important;
 			}
+			.searchform {
+				position: relative;
+				margin-top: 100px;
+				margin-bottom: auto;
+				background: rgba(0,0,0,.5);
+				padding: 40px;
+			}
 		}
 
-		.home {
-      #jobs-list-filter-wrapper {
-        padding: 15px 30px 15px 30px;
-        background-color: #000;
-        border-radius: 30px;
-      }
-      #main-navigation {
-  			height: 75px !important;
-  			.navbar-nav>li>a {
-  				padding-top: 10px;
-  				padding-bottom: 10px;
-  				margin-top: 30px;
-  				color: @g24-white;
-  			}
-  			a:hover {
-  				background-color: transparent;
-  			}
-  			ul li a.inverted {
-  				border: 1px solid @g24-white;
-  				background-color: transparent;
-  			}
-  		}
-		}
 		#main-navigation {
 			font-weight: 600;
 			ul li a.inverted {
@@ -392,33 +272,10 @@ main {
             position: absolute;
             width: 100%;
           }
-          .bg-static {
-            background-image: url(background.jpg);
-            background-color: #999;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center center;
-            display: block;
-            min-height: 400px;
-          }
         }
 		  }
     }
 
-		.search-form-container {
-			input[type=text] {
-				border-top-left-radius: 15px !important;
-				border-top-right-radius: 15px !important;
-			}
-			.btn-default {
-				width: 50% !important;
-				border-bottom-right-radius: 15px !important;
-			}
-			.btn-primary {
-				width: 50% !important;
-				border-bottom-left-radius: 15px !important;
-			}
-		}
 		.navbar-header {
 			.menu-logo {
 				width: 190px;
@@ -432,6 +289,7 @@ main {
 				width: 50% !important;
 			}
 		}
+
 		#main-navigation {
 			height: inherit;
 			ul li a.inverted {
@@ -471,53 +329,7 @@ a[data-toggle="collapse"] {
 	}
 }
 
-// Preistabellen
-#rpt_pricr {
-	.panel-primary {
-		border-color: #f1f1f1;
-		padding: 10px;
-		>.panel-heading {
-			color: black;
-			padding-top: 20px;
-			margin: 0;
-			text-align: center!important;
-			font-size: 20px;
-		}
-	}
-	.btn {
-		display: block;
-		white-space: normal;
-	}
-	.rpt_head {
-		.rpt_price {
-			font-size: 28px;
-			font-weight: 400;
-			text-align: center;
-			strike {
-				color: #b2b2b2;
-				padding-right: 5px;
-				font-size: 15px;
-				text-align: center;
-			}
-		}
-		.rpt_subtitle {
-			text-align: center;
-			font-size: 16px;
-		}
-		.rpt_description {
-			margin-top: 10px;
-			font-size: 12px;
-			color: #ccc;
-			text-align: center;
-		}
-		a {
-			text-align: center;
-		}
-	}
-	.rpt_yk_inactive {
-		color: gray;
-	}
-}
+
 
 // links im Wordpress-Bereich
 #wp-content1 {
@@ -532,4 +344,27 @@ a[data-toggle="collapse"] {
 #form-orders-settings .daf-desc,
 #sf-general-customerNote {
 	display: none;
+}
+
+.logo-text{
+    color: @brand-primary;   
+}
+
+.bg-static {
+	background-image: url(background.jpg);
+	background-color: #999;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	display: block;
+	min-height: 236px;
+	h1 {
+		color: white;
+		font-weight: 600;
+	}
+}
+
+.logo {
+	position: absolute;
+	top: -50px;
 }

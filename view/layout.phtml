@@ -18,7 +18,7 @@ $notifications = $this->partial('core/notifications');
 
 // set default page title
 
-$this->headTitle($this->translate('Vertriebskarriere.de'))->setSeparator(' | ')->setAutoEscape(false);
+$this->headTitle($this->translate('Vertriebskarriere.com'))->setSeparator(' | ')->setAutoEscape(false);
 
 // set default keywords
 
@@ -36,83 +36,19 @@ $this->configHeadScript()->appendFile($this->basePath('modules/JobsFrankfurt/js/
 $langScript = 'dist/locales/' . $lang . '.js';
 $this->configHeadScript()->appendFile($this->basePath($langScript));
 
-$this->headLink()->appendStylesheet($this->basePath('/modules/JobsFrankfurt/jssocials-1.4.0/dist/jssocials.css'));
-$this->headLink()->appendStylesheet($this->basePath('/modules/JobsFrankfurt/jssocials-1.4.0/dist/jssocials-theme-flat.css'));
-
 $this->configHeadScript()->appendScript('var lang="' . $this->params('lang') . '";'
     . 'var basePath="' . $this->basePath() . '";');
 
-
-
 ?>
-
-<?php echo $this->doctype(); ?>
+<?= $this->doctype(); ?>
 <html lang="<?php echo $this->params('lang') ?>">
 <head>
-    <?php echo $this->headTitle() ?>
-    <?php echo $this->headMeta() ?>
-    <?php echo $this->configHeadScript() ?>
-    <?php echo $this->headLink() ?>
-    <?php echo $this->headStyle() ?>
-    
-    <link type="text/css" href="/modules/JobsFrankfurt/fit.css" rel="stylesheet" media="screen">
-
-    <style>
-     @media (max-width: 768px){
-
-         .navbar-nav {
-    margin: 0;
-    width: 100%;
-}
-        .navbar-nav>li>a:hover {
-            color: #fff;
-           }
-
-           #main-navigation a:hover, #main-navigation .dropdown-menu>li>a:hover {
-             color: #fff!important;
-        }
-
-         #main-navigation ul li a.inverted:hover {
-
-             color: #000!important;
-         }
-
-        .navbar-collapse {
-
-          box-shadow: none!important;
-        }
-
-
-#main-navigation .dropdown-menu>li>a {
-    color: #000!important;
-}
-        .navbar-nav .open .dropdown-menu>li>a, .navbar-nav .open .dropdown-menu .dropdown-header {
-    padding: 8px 15px 8px 45px!important;
-}
-.nav>li {
-
-    border-bottom: 1px solid #ddd;
-}
-        }
-        #yk-login .nav .active a, #wizardcontainer-jobs-form-categoriescontainer .nav .active a, #wizardcontainer-jobs-form-job .nav .active a {color: #fff;}
-        #jobsbymail-subscribe-form .row {margin-bottom:10px;}
-        iframe {border:0}
-        #form-jobs-form-preview  .panel-body {padding: 0!important;}
-        #main-navigation ul li a.inverted {background-color:#fff;color:#243b84;}
-        #main-navigation ul li a.inverted:hover {color:#fff;}
-            .navbar-toggle {
-             border-color: #242424!important;
-            background-color: #243b84!important;
-            }
-
-            .navbar-toggle .icon-bar {
-                background-color: #ffffff;
-          }
-
-    </style>
+    <?= $this->headTitle() ?>
+    <?= $this->headMeta() ?>
+    <?= $this->configHeadScript() ?>
+    <?= $this->headLink() ?>
+    <?= $this->headStyle() ?>
     <script>
-
-
         (function( $ ) {
 	'use strict';
 

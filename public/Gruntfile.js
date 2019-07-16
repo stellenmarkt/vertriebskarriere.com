@@ -24,5 +24,5 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('yawik:gastro24', ['less:gastro24']);
+  grunt.registerTask('yawik:vertriebsjobs', ['less:vertriebsjobs']);
 };
