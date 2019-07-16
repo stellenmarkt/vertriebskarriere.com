@@ -7,7 +7,7 @@ require 'recipe/zend_framework.php';
 set('application', 'vertriebskarriere.com-');
 
 // Project repository
-set('repository', 'git@gitlab.cross-solution.de:yawik-modules/vertriebskarriere.com-.git');
+set('repository', 'git@gitlab.cross-solution.de:yawik-modules/vertriebskarriere.com.git');
 
 // Shared files/dirs between deploys 
 add('shared_files', [
