@@ -95,15 +95,19 @@ $this->configHeadScript()->appendScript('var lang="' . $this->params('lang') . '
           <div class="container navbar">
 		     <div class="row">
                <div class="navbar-header">
-
                  <button class="navbar-toggle collapsed" data-target="#main-navigation" data-toggle="collapse" type="button">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                    <img src="<?php echo $this->basepath('/modules/JobsFrankfurt/logo-stellen.png') ?>" alt="Jobs in Frankfurt" class="menu-logo">
-                 </div>
+                  <div class="logo">
+                    <a class="menu-logo" href="/de">
+                        <img src="<?php echo $this->basepath('/modules/JobsFrankfurt/logo-stellen.png') ?>" alt="Jobs in Frankfurt" class="menu-logo">
+                    </a>
+                  </div>
+                </div>
+            </div>
             <nav id="main-navigation" class="navbar-collapse collapse navbar-collapse" role="navigation">
 
 
