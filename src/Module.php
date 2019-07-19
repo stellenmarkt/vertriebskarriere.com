@@ -128,7 +128,27 @@ class Module implements AssetProviderInterface
                     $query = $event->getRequest()->getQuery();
                     $query->set('id', $routeMatch->getParam('id') ?: $event->getRequest()->getQuery('id'));
                 }
+                
+                if ('lang/jobboard' == $matchedRouteName || 'lang/landingPage' == $matchedRouteName) {
+                    $services = $event->getApplication()->getServiceManager();
+                    $options = $services->get(Landingpages::class);
+                    $query = $event->getRequest()->getQuery();
 
+                    foreach ([
+                        'r' => '__region_MultiString',
+                        'l' => '__city_MultiString',
+                        'c' => '__organizationTag',
+                        'p' => '__profession_MultiString',
+                        'i' => '__industry_MultiString',
+                        't' => '__employmentType_MultiString',
+                        ] as $shortName => $longName) {
+
+                        if ($v = $query->get($shortName)) {
+                            $query->set($longName, $v);
+                            $query->offsetUnset($shortName);
+                        }
+                    }
+                }
             }, -9999);
 
             $eventManager->attach(MvcEvent::EVENT_DISPATCH, function(MvcEvent $e) {
