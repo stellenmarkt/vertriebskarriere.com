@@ -4,8 +4,22 @@ module.exports = function(grunt) {
   var moduleDir = targetDir + "/modules/JobsFrankfurt";
 
   grunt.config.merge({
+    concat: {
+      vertriebskarriere: {
+        files: [
+          {
+            src: [
+              "./node_modules/jquery-match-height/dist/jquery.matchHeight.js",
+              "./node_modules/cookie-notice/dist/cookie.notice.js",
+              "./public/js/index.js"
+            ],
+            dest: targetDir + "/modules/JobsFrankfurt/dist/vertriebskarriere.js"
+          }
+        ]
+      }
+    },
     less: {
-      stellenmarkt: {
+      vertriebskarriere: {
         options: {
           compress: true,
           optimization: 2
@@ -24,5 +38,6 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('yawik:vertriebsjobs', ['less:vertriebsjobs']);
+  grunt.registerTask("yawik:vertriebskarriere", ["less:vertriebskarriere", "concat:vertriebskarriere"]);
+  grunt.registerTask("yawik:vertriebskarriere:dev", ["less", "concat"]);
 };

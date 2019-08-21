@@ -31,7 +31,7 @@ $this->configHeadScript()->prependScript('var lang="' . $lang . '";'
 $this->headLink()->prependStylesheet($this->basePath() . '/modules/JobsFrankfurt/layout.css');
 $this->headLink()->prependStylesheet($this->basePath('dist/css/core.min.css'));
 $this->configHeadScript()->prependFile($this->basepath('dist/js/core.js'));
-$this->configHeadScript()->appendFile($this->basePath('modules/JobsFrankfurt/js/jquery.matchHeight.js'))->appendFile($this->basePath('modules/JobsFrankfurt/js/index.js'));
+$this->configHeadScript()->appendFile($this->basePath('modules/JobsFrankfurt/dist/vertriebskarriere.js'));
 
 $langScript = 'dist/locales/' . $lang . '.js';
 $this->configHeadScript()->appendFile($this->basePath($langScript));
@@ -151,5 +151,50 @@ $this->configHeadScript()->appendScript('var lang="' . $this->params('lang') . '
 </main>
 
 <?php if (!$this->noFooter): echo $this->partial("footer"); endif; ?>
+<script>
+  new cookieNoticeJS({
+
+    // Localizations of the notice message
+    'messageLocales': {
+      'it': 'Custom localized message'
+    },
+
+    // Localizations of the dismiss button text
+    'buttonLocales': {
+      'it': 'Chiudi'
+    },
+
+    // Position for the cookie-notifier (default=bottom)
+    'cookieNoticePosition': 'top',
+
+    // Shows the "learn more button (default=false)
+    'learnMoreLinkEnabled': false,
+
+    // The message will be shown again in X days
+    'expiresIn': 30,
+
+    // Dismiss button background color
+    'buttonBgColor': '#d35400',
+
+    // Dismiss button text color
+    'buttonTextColor': '#fff',
+
+    // Notice background color
+    'noticeBgColor': '#000',
+
+    // Notice text color
+    'noticeTextColor': '#fff',
+
+    // the learnMoreLink color (default='#009fdd')
+    'linkColor': '#f00',
+
+    // The target of the learn more link (default='', or '_blank')
+    'linkTarget': '',
+
+    // Print debug output to the console (default=false)
+    'debug': false
+  });
+</script>
+
 </body>
 </html>
