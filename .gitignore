@@ -15,5 +15,3 @@ public/layout.css
 
 test/sandbox/.env
 
-composer.lock
-package-lock.json
