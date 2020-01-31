@@ -73,8 +73,8 @@ $this->headScript()->captureStart();
 <?php echo $this->flashMessenger()->render('default', array('alert', 'alert-success')) ?>
 
 <div id="jobs-list-filter-wrapper">
-    <div class="search-form-container bg-static">
-        <div class="container ">
+    <div class="search-form-container">
+        <div class="container-fluid">
         <?php
             $queryParams = $this->params()->fromQuery();
             foreach (array_keys($this->jobs->getFacets()->toArray()) as $facetName):
@@ -96,13 +96,15 @@ $this->headScript()->captureStart();
             $this->filterForm->setAttribute('action', $this->url('lang/jobboard', [], true));
             $this->filterForm->getButtons()->get('clear')->setAttribute('onclick', 'location.href=\'?clear=1\';');
             ?>    
-            <div class="searchform">
+            <div class="searchform container">
                 <?=$this->searchForm()->openTag($filterForm)?>
                 <div class="row">
-                <div class="input-group col-md-5 col-xs-12 pull-left"><?=$this->formElement($filterForm->get('q'))?></div>
-                <div class="input-group col-md-4 col-xs-6 pull-left"><?=$this->formElement($filterForm->get('l'))?></div>
-                <div class="input-group col-md-1 col-xs-6 pull-left"><?=$this->formElement($filterForm->get('d'))?></div>
-                <div class="input-group col-md-2 col-xs-12 pull-left"><?=$this->searchForm()->renderButtons($filterForm->getButtons())?></div>
+                <div style="width: 90%; margin: 0 auto;">
+                <div class="input-group col-md-4 col-xs-12"><?=$this->formElement($filterForm->get('q'))?></div>
+                <div class="input-group col-md-4 col-xs-12"><?=$this->formElement($filterForm->get('l'))?></div>
+                <div class="input-group col-md-1 col-xs-12"><?=$this->formElement($filterForm->get('d'))?></div>
+                <div class="input-group col-md-2 col-xs-12"><?=$this->searchForm()->renderButtons($filterForm->getButtons())?></div>
+                </div>
                 </div>
                 <?=$this->searchForm()->closeTag()?>
             </div>

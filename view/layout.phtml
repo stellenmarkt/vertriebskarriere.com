@@ -87,12 +87,13 @@ $this->configHeadScript()->appendScript('var lang="' . $this->params('lang') . '
 
 })( jQuery );
     </script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
 
 </head>
 <body>
 <?php if (!$this->noHeader):?>
     <header id="header" role="banner">
-          <div class="container navbar">
+          <div class="navbar">
 		     <div class="row">
                <div class="navbar-header">
                  <button class="navbar-toggle collapsed" data-target="#main-navigation" data-toggle="collapse" type="button">
@@ -102,12 +103,13 @@ $this->configHeadScript()->appendScript('var lang="' . $this->params('lang') . '
                     <span class="icon-bar"></span>
                   </button>
                   <div class="logo">
-                    <a class="menu-logo" href="/de">
-                        <img src="<?php echo $this->basepath('/modules/JobsFrankfurt/logo-stellen.png') ?>" alt="Jobs in Frankfurt" class="menu-logo">
+                    <a href="/de">
+                        <img src="<?php echo $this->basepath('/modules/JobsFrankfurt/logo_icon.png') ?>" alt="Vertriebskarriere">
                     </a>
                   </div>
+                  <div class="logotype"><span>Vertriebs</span>karriere</div>
                 </div>
-            </div>
+            
             <nav id="main-navigation" class="navbar-collapse collapse navbar-collapse" role="navigation">
 
 
@@ -122,11 +124,9 @@ $this->configHeadScript()->appendScript('var lang="' . $this->params('lang') . '
                 ?>
 
             </nav>
+            </div>
             <!-- /main-navigation -->
         </div>
-              <br>
-              <br>
-              <br>
      </div>
         <div id="formular">
         </div>
@@ -143,11 +143,9 @@ $this->configHeadScript()->appendScript('var lang="' . $this->params('lang') . '
 
  </style>
 
-<main id="content" style="background-color:#f6f6f6;margin-bottom:0;padding-bottom:50px;min-height:65vh;padding-top:15px;position:relative;">
-<div class="container">
+<main id="content">
         <?php echo $notifications?>
          <?php echo $this->content;?>
-</div>
 </main>
 
 <?php if (!$this->noFooter): echo $this->partial("footer"); endif; ?>
