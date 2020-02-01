@@ -214,12 +214,21 @@ main {
 	margin-left: 5px;
 }
 
+#header{
+	background-color: #02819e;
+	color: #fff;
+}
+
+.search-form-container {
+  .btn-primary {
+    background-color: #db9a00;
+    border: none;
+  }
+}
+
 // IPad und größer
 @media screen {
 	@media(min-width: @screen-sm) {
-		#header{
-			background-color: #02819e;
-		}
 		.navbar-header {
 			.menu-logo {
 				width: 70px;
@@ -235,13 +244,6 @@ main {
 			}
 			.btn-primary {
 				width: 75% !important;
-				background-color: #db9a00;
-    			border: 1px solid #db9a00;
-			}
-
-
-
-			.btn-primary {
 				z-index: 1;
 				position: relative;
 				font-size: 16px;
@@ -249,8 +251,6 @@ main {
 				color: white;
 				padding: 0.7em 1em;
 				outline: none;
-				border: none;
-				background-color: #db9a00;
 			  }
 			  
 			  .btn-primary::before {
