@@ -99,12 +99,10 @@ $this->headScript()->captureStart();
             <div class="searchform container">
                 <?=$this->searchForm()->openTag($filterForm)?>
                 <div class="row">
-                <div style="width: 90%; margin: 0 auto;">
                 <div class="input-group col-md-4 col-xs-12"><?=$this->formElement($filterForm->get('q'))?></div>
                 <div class="input-group col-md-4 col-xs-12"><?=$this->formElement($filterForm->get('l'))?></div>
                 <div class="input-group col-md-1 col-xs-12"><?=$this->formElement($filterForm->get('d'))?></div>
                 <div class="input-group col-md-2 col-xs-12"><?=$this->searchForm()->renderButtons($filterForm->getButtons())?></div>
-                </div>
                 </div>
                 <?=$this->searchForm()->closeTag()?>
             </div>
