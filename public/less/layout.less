@@ -216,17 +216,93 @@ main {
 .navbar-brand>img {
 	margin-left: 5px;
 }
-
+header{
+	overflow: hidden;
+}
 #header{
 	background-color: #02819e;
+	background-image: url("/modules/JobsFrankfurt/bg_header.png");
+	background-repeat: no-repeat;
 	color: #fff;
 }
-
+.search-form-container{
+	background-color: #02819e;
+	background-image: url("/modules/JobsFrankfurt/bg_header.png");
+	background-repeat: no-repeat;
+	background-position: bottom;
+}
 .search-form-container {
   .btn-primary {
     background-color: #db9a00;
     border: none;
   }
+}
+.navbar-nav{
+	z-index: 1;
+}
+#similar{
+margin-top: 0px;
+line-height: 0;
+}
+#header{
+	position: relative;
+}
+#header::before {
+    -webkit-transform: translate3d(-15vw,0,0) skewX(-111deg);
+    transform: translate3d(-15vw, 0, 0) skewX(-111deg) !important;
+    background-color: #196779;
+	opacity: .6;
+}
+#header::before {
+    animation: slide 1s forwards;
+    animation-delay: 0s;
+    animation-delay: 0.5s;
+}
+#header::before, #header::after {
+    position: absolute;
+    content: '';
+	top: -13px;
+	right: -103vw;
+	width: 128vw;
+	height: 42vh;
+    -webkit-transform: translate3d(100vw,0,0);
+transform: translate3d(100vw,0,0);
+-webkit-transition: -webkit-transform .5s .15s ease-out;
+transition: -webkit-transform .5s .15s ease-out;
+transition: transform .5s .15s ease-out;
+transition: transform .5s .15s ease-out,-webkit-transform .5s .15s ease-out;
+    transition-delay: 0.15s, 0.15s;
+}
+
+.search-form-container{
+	position: relative;
+	overflow: hidden;
+}
+.search-form-container::before {
+    -webkit-transform: translate3d(-15vw,0,0) skewX(-111deg);
+    transform: translate3d(-15vw, 0, 0) skewX(111deg) !important;
+    background-color: #196779;
+	opacity: .6;
+}
+.search-form-container::before {
+    animation: slide 1s forwards;
+    animation-delay: 0s;
+    animation-delay: 0.5s;
+}
+.search-form-container::before, .search-form-container::after {
+    position: absolute;
+    content: '';
+	top: -13px;
+	left: -103vw;
+	width: 128vw;
+	height: 42vh;
+	-webkit-transform: translate3d(100vw,0,0);
+	transform: translate3d(100vw,0,0);
+	-webkit-transition: -webkit-transform .5s .15s ease-out;
+	transition: -webkit-transform .5s .15s ease-out;
+	transition: transform .5s .15s ease-out;
+	transition: transform .5s .15s ease-out,-webkit-transform .5s .15s ease-out;
+	transition-delay: 0.15s, 0.15s;
 }
 
 // IPad und größer
@@ -281,8 +357,7 @@ main {
 			.searchform {
 				position: relative;
 				margin-top: 1%;
-    				margin-bottom: 1%;
-    				background:#02819e;
+    			margin-bottom: 1%;
 				padding: 0px;
 				.row {
 					text-align: center;
@@ -357,6 +432,18 @@ main {
 
 		}
 	}
+	.navbar-toggle {
+		position: relative;
+		float: right;
+		padding: 9px 10px;
+		margin-right: 29px;
+		margin-top: 34px;
+		margin-bottom: -17px;
+		background-color: transparent;
+		background-image: none;
+		border: 2px solid #fff;
+		border-radius: 4px;
+	}
   // Ipad
   @media(max-width: @screen-sm) {
     .search-form-container {
@@ -422,8 +509,8 @@ main {
 			}
 		}
 		button.collapsed {
-			border-color: @g24-grey;
-			background-color: @brand-primary;
+			border-color: #fff;
+			background-color: transparent;
 		}
 	}
 }
@@ -500,9 +587,6 @@ h6{
 .logotype span{
     text-transform: uppercase;
     font-weight:600;
-}
-.container-fluid{
-	background-color:#02819e;
 }
 .pagination{
 	margin-top: 15px !important;
