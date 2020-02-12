@@ -1,5 +1,5 @@
 @import "../../../modules/Core/less/yawik-core.less";
-@brand-primary: #323493;
+@brand-primary: #02819e;
 @g24-grey: #242424;
 @g24-white: #ffffff;
 @fa-font-path: '/dist/fonts';
@@ -9,7 +9,7 @@
 @headings-font-weight: 600;
 @footer-height: 49px;
 @navbar-height: 0px;
-@navbar-default-link-color: green;
+@navbar-default-link-color: #000;
 @navbar-default-link-hover-color: @g24-white;
 @navbar-default-bg: transparent;
 @nav-link-hover-bg: transparent;
@@ -24,7 +24,7 @@
 @border-radius-base: 4px;
 @link-color: @g24-grey;
 @link-hover-color: @g24-grey;
-@nav-pills-active-link-hover-color: green;
+@nav-pills-active-link-hover-color: #000;
 @btn-primary-bg: @brand-primary;
 @jumbotron-padding: 0px;
 @font-size-h2: 21px;
@@ -438,6 +438,9 @@ line-height: 0;
 		background-image: none;
 		border: 2px solid #fff;
 		border-radius: 4px;
+		 .icon-bar{
+			background-color: @g24-white !important; 
+		 }
 	}
   // Ipad
   @media(max-width: @screen-sm) {
@@ -501,6 +504,13 @@ line-height: 0;
 			}
 			a:hover {
 				background-color: @brand-primary;
+			}
+			.nav > li {
+				margin-right: 23px !important;
+				font-size: 16px;
+			}
+			.navbar-nav > li > a {
+				color: @g24-white !important;
 			}
 		}
 		button.collapsed {
@@ -583,6 +593,10 @@ h6{
     text-transform: uppercase;
     font-weight:600;
 }
+.logotype a{
+	color: #fff !important;
+	text-decoration: none;
+}
 .pagination{
 	margin-top: 15px !important;
 }
@@ -600,4 +614,102 @@ h6{
 	border-color:#b96a67;
 	color:#fff;
 	width: 100%;
+}
+/*  animation logo */
+svg{
+	margin-left: 10px;
+	margin-top: 7px;
+}
+ellipse{
+	animation: scale 3s 1;
+	z-index: 1000;
+}
+
+@keyframes scale {
+	0% {
+		transform-origin: center;
+	}
+	100% {
+		transform: scale(3)
+	}
+}
+.logo{
+    float: left;
+    margin: 0 0 0 20px;
+    padding: 10px 0 0 0;
+    position: static !important;
+	width: 76px;
+	height: 97px;
+}
+.logo-animated{
+	width: 110px;
+	height: 74px;
+	overflow: hidden;
+	position: relative;
+}
+
+@keyframe: ~'goup@{i}';
+@i: 4;
+.logo-animated(@i) when (@i > 0) {
+	.bar0@{i} {
+		transform: skewY(-10deg * @i - 10deg);
+		width: 10px;
+		background: #fff;
+		height: (5px * @i + 6px + 1.1 * @i * @i);
+		left: (@i * 15px);
+		margin-right: 6px;
+		position: absolute;
+		bottom: -6px;
+		animation: @keyframe 1 1/(@i + 1.2s) linear;
+	}
+	.logo-animated(@i - 1);
+}
+.logo-animated(@i);
+@keyframes goup1 {
+	0%{
+		bottom: -15px;
+	 }
+	 100%{
+		 bottom: 0px;
+	 }
+ }
+ @keyframes goup2{
+	 0%{
+		 bottom: -45px;	
+	 }
+	 100%
+	 {
+		 bottom: 0px;
+	 }
+ }
+ @keyframes goup3{
+	 0%{
+		 bottom: -65px;
+	 }
+	 100%{
+		 bottom: 0px;
+	 }
+ }
+ @keyframes goup4{
+	 0%{
+		 bottom: -85px;
+	 }
+	 100%{
+		 bottom: 0px;
+	 }
+ }
+
+.clearfix::before{
+content: ".";
+display: block;
+height: 0;
+clear: both;
+visibility: hidden;
+}
+.clearfix::after{
+content: ".";
+display: block;
+height: 0;
+clear: both;
+visibility: hidden;
 }
