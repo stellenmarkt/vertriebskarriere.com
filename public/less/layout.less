@@ -616,23 +616,6 @@ h6{
 	width: 100%;
 }
 /*  animation logo */
-svg{
-	margin-left: 10px;
-	margin-top: 7px;
-}
-ellipse{
-	animation: scale 3s 1;
-	z-index: 1000;
-}
-
-@keyframes scale {
-	0% {
-		transform-origin: center;
-	}
-	100% {
-		transform: scale(3)
-	}
-}
 .logo{
     float: left;
     margin: 0 0 0 20px;
@@ -647,7 +630,16 @@ ellipse{
 	overflow: hidden;
 	position: relative;
 }
-
+svg{
+	width: 72px;
+	margin-top: -3px;
+}
+.move{
+    z-index: 2;
+    position: absolute;
+    top: 0px;
+    width: 50px;
+}
 @keyframe: ~'goup@{i}';
 @i: 4;
 .logo-animated(@i) when (@i > 0) {
@@ -660,7 +652,7 @@ ellipse{
 		margin-right: 6px;
 		position: absolute;
 		bottom: -6px;
-		animation: @keyframe 1 1/(@i + 1.2s) linear;
+		animation: @keyframe 1 1/(@i + 0.7s) linear;
 	}
 	.logo-animated(@i - 1);
 }
