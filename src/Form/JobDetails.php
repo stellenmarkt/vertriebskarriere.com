@@ -14,8 +14,8 @@ use Core\Entity\Hydrator\EntityHydrator;
 use Core\Form\ViewPartialProviderInterface;
 use Core\Form\ViewPartialProviderTrait;
 use JobsFrankfurt\Filter\PdfFileUri;
-use Zend\Form\Fieldset;
-use Zend\InputFilter\InputFilterProviderInterface;
+use Laminas\Form\Fieldset;
+use Laminas\InputFilter\InputFilterProviderInterface;
 
 /**
  * ${CARET}

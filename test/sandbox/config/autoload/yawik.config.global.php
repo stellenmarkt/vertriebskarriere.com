@@ -4,7 +4,7 @@ return [
     'doctrine' =>[
         'connection' =>[
             'odm_default' =>[
-                'connectionString' => 'mongodb://mongo1:27017/karriere24',
+                'connectionString' => 'mongodb://mongo1.hq.cross:27017/karriere24',
             ]
         ],
         'configuration' => [

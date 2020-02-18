@@ -11,7 +11,7 @@
 namespace JobsFrankfurt\ContactForm\Options;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Factory for \Gastro24\ContactForm\Options\ContactFormOptions

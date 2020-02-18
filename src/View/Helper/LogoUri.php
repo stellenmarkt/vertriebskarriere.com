@@ -11,7 +11,7 @@
 namespace JobsFrankfurt\View\Helper;
 
 use Solr\Entity\JobProxy;
-use Zend\Form\View\Helper\AbstractHelper;
+use Laminas\Form\View\Helper\AbstractHelper;
 
 /**
  * ${CARET}

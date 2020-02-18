@@ -10,11 +10,11 @@
 /** */
 namespace JobsFrankfurt\WordpressApi\Service;
 
-use Zend\Cache\Storage\StorageInterface;
-use Zend\Cache\StorageFactory;
-use Zend\Http\Client;
-use Zend\Http\Request;
-use Zend\Json\Json;
+use Laminas\Cache\Storage\StorageInterface;
+use Laminas\Cache\StorageFactory;
+use Laminas\Http\Client;
+use Laminas\Http\Request;
+use Laminas\Json\Json;
 
 /**
  * ${CARET}
@@ -72,7 +72,7 @@ class WordpressClient implements WordpressClientInterface
     }
 
     /**
-     * @param \Zend\Cache\Storage\StorageInterface $cache
+     * @param \Laminas\Cache\Storage\StorageInterface $cache
      *
      * @return self
      */
@@ -84,7 +84,7 @@ class WordpressClient implements WordpressClientInterface
     }
 
     /**
-     * @return \Zend\Cache\Storage\StorageInterface
+     * @return \Laminas\Cache\Storage\StorageInterface
      */
     public function getCache()
     {
@@ -103,7 +103,7 @@ class WordpressClient implements WordpressClientInterface
     }
 
     /**
-     * @param \Zend\Http\Client $httpClient
+     * @param \Laminas\Http\Client $httpClient
      *
      * @return self
      */
@@ -115,7 +115,7 @@ class WordpressClient implements WordpressClientInterface
     }
 
     /**
-     * @return \Zend\Http\Client
+     * @return \Laminas\Http\Client
      */
     public function getHttpClient()
     {
@@ -150,7 +150,7 @@ class WordpressClient implements WordpressClientInterface
 
         try {
             $result = Json::decode($result);
-        } catch (\Zend\Json\Exception\RuntimeException $ex) {
+        } catch (\Laminas\Json\Exception\RuntimeException $ex) {
             return (object) ['error' => true, 'code' => 'invalid_json_response', 'message' => 'Response has invalid json format.', 'data' => ['response' => $result]];
         }
 

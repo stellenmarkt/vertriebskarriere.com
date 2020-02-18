@@ -13,7 +13,7 @@ namespace JobsFrankfurt\Factory\View\Helper;
 use JobsFrankfurt\View\Helper\LandingpagesList;
 use JobsFrankfurt\WordpressApi\Service\WordpressClient;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Factory for \Gastro24\View\Helper\LandingpagesList

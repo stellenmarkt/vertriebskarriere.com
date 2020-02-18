@@ -13,7 +13,7 @@ namespace JobsFrankfurt\Factory\Controller;
 use JobsFrankfurt\Controller\CreateSingleJob;
 use JobsFrankfurt\Form\CreateSingleJobForm;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Factory for \Gastro24\Controller\CreateSingleJob

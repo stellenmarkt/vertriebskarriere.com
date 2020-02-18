@@ -13,7 +13,7 @@ namespace JobsFrankfurt\ContactForm\Form;
 use Core\Form\CustomizableFieldsetInterface;
 use Core\Form\CustomizableFieldsetTrait;
 use Core\Form\Form;
-use Zend\InputFilter\InputFilterProviderInterface;
+use Laminas\InputFilter\InputFilterProviderInterface;
 
 /**
  * ${CARET}

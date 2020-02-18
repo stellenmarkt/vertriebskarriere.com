@@ -11,7 +11,7 @@
 namespace JobsFrankfurt\View\Helper;
 
 use JobsFrankfurt\WordpressApi\Service\WordpressClient;
-use Zend\View\Helper\AbstractHelper;
+use Laminas\View\Helper\AbstractHelper;
 
 /**
  * ${CARET}
@@ -39,7 +39,7 @@ class LandingpagesList extends AbstractHelper
     /**
      *
      *
-     * @var \Zend\View\Helper\Url
+     * @var \Laminas\View\Helper\Url
      */
     private $urlHelper;
 
@@ -50,11 +50,11 @@ class LandingpagesList extends AbstractHelper
     }
 
     /**
-     * @param \Zend\View\Helper\Url $urlHelper
+     * @param \Laminas\View\Helper\Url $urlHelper
      *
      * @return self
      */
-    public function setUrlHelper(\Zend\View\Helper\Url $urlHelper)
+    public function setUrlHelper(\Laminas\View\Helper\Url $urlHelper)
     {
         $this->urlHelper = $urlHelper;
 
@@ -62,7 +62,7 @@ class LandingpagesList extends AbstractHelper
     }
 
     /**
-     * @return \Zend\View\Helper\Url
+     * @return \Laminas\View\Helper\Url
      */
     public function getUrlHelper()
     {

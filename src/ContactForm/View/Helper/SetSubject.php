@@ -10,7 +10,7 @@
 /** */
 namespace JobsFrankfurt\ContactForm\View\Helper;
 
-use Zend\View\Helper\AbstractHelper;
+use Laminas\View\Helper\AbstractHelper;
 
 /**
  * ${CARET}
@@ -22,7 +22,7 @@ class SetSubject extends AbstractHelper
 {
     public function __invoke($subject)
     {
-        /* @var \Zend\View\Renderer\PhpRenderer $view */
+        /* @var \Laminas\View\Renderer\PhpRenderer $view */
         $view = $this->getView();
         $mail = $view->get('mail');
 

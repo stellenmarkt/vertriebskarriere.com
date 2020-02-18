@@ -11,7 +11,7 @@
 namespace JobsFrankfurt\Controller;
 
 use JobsFrankfurt\WordpressApi\Service\Plugin\WordpressV2;
-use Zend\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\Controller\AbstractActionController;
 
 /**
  * ${CARET}

@@ -42,7 +42,7 @@ class InvoiceAddressSettingsFieldset extends SettingsFieldset
         $this->add(
             [
                 'name'       => 'gender',
-                'type'       => 'Zend\Form\Element\Select',
+                'type'       => 'Laminas\Form\Element\Select',
                 'options'    => [
                     'label'         => /*@translate */ 'Salutation',
                     'value_options' => [

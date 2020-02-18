@@ -26,7 +26,7 @@ class VisitedJobsContainer
 
     public function __construct($namespace = 'gastro24_visitedjobs')
     {
-        $this->container = new \Zend\Session\Container($namespace);
+        $this->container = new \Laminas\Session\Container($namespace);
         if (!isset($this->container->visitedJobs)) {
             $this->container->visitedJobs = [];
         }

@@ -13,9 +13,9 @@ namespace JobsFrankfurt\WordpressApi\Factory\Service;
 use JobsFrankfurt\WordpressApi\Service\WordpressClient;
 use JobsFrankfurt\WordpressApi\Service\WordpressClientPluginManager;
 use Interop\Container\ContainerInterface;
-use Zend\Cache\StorageFactory;
-use Zend\Http\Client;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\Cache\StorageFactory;
+use Laminas\Http\Client;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
  * ${CARET}

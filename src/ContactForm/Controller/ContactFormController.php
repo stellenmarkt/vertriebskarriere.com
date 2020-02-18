@@ -12,8 +12,8 @@ namespace JobsFrankfurt\ContactForm\Controller;
 
 use JobsFrankfurt\ContactForm\Controller\Plugin\ContactMailSender;
 use JobsFrankfurt\ContactForm\Form\ContactForm;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
 
 /**
  * ${CARET}
@@ -50,7 +50,7 @@ class ContactFormController extends AbstractActionController
 
     private function process()
     {
-        /* @var \Zend\Http\Request $request */
+        /* @var \Laminas\Http\Request $request */
         $request = $this->getRequest();
 
         if (!$request->isPost()) {

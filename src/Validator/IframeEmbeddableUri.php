@@ -10,8 +10,8 @@
 /** */
 namespace JobsFrankfurt\Validator;
 
-use Zend\Validator\AbstractValidator;
-use Zend\Validator\ValidatorInterface;
+use Laminas\Validator\AbstractValidator;
+use Laminas\Validator\ValidatorInterface;
 
 /**
  * ${CARET}

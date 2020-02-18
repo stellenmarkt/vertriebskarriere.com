@@ -12,7 +12,7 @@ namespace JobsFrankfurt\WordpressApi\Factory\Filter;
 
 use JobsFrankfurt\WordpressApi\Filter\PageIdMap;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
  * ${CARET}

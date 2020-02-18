@@ -11,7 +11,7 @@
 namespace JobsFrankfurt\View\Helper;
 
 use Organizations\Entity\OrganizationInterface;
-use Zend\View\Helper\AbstractHelper;
+use Laminas\View\Helper\AbstractHelper;
 
 /**
  * ${CARET}
@@ -47,7 +47,7 @@ class OrgProfileUrl extends AbstractHelper
     /**
      *
      *
-     * @return \Zend\View\Helper\Url
+     * @return \Laminas\View\Helper\Url
      */
     private function getUrlHelper()
     {

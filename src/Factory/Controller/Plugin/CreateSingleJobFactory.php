@@ -12,7 +12,7 @@ namespace JobsFrankfurt\Factory\Controller\Plugin;
 
 use JobsFrankfurt\Controller\Plugin\CreateSingleJob;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 
 /**

@@ -14,20 +14,22 @@
         }
     ],
     "keywords": [
-        "yawik", "skin"
+        "yawik",
+        "skin"
     ],
     "prefer-stable": true,
     "minimum-stability": "dev",
     "require": {
-        "yawik/core": "^0.33",
-        "yawik/jobs": "^0.33",
+        "yawik/core": "^0.34",
+        "yawik/jobs": "^0.34",
         "yawik/orders": "^0.3",
+        "yawik/simple-import": "^0.7",
         "yawik/jobs-by-mail": "^0.2",
-        "yawik/solr": "^0.8",
-        "yawik/simple-import": "^0.1",
-        "yawik/organizations": "^0.33",
-        "yawik/pdf": "^0.33",
-        "yawik/composer-plugin": "^0.32@dev"
+        "yawik/solr": "^0.9",
+        "yawik/organizations": "^0.34",
+        "yawik/pdf": "^0.34",
+        "yawik/composer-plugin": "^1.0",
+        "laminas/laminas-dependency-plugin": "^1.0"
     },
     "autoload": {
         "psr-4": {

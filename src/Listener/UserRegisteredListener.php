@@ -12,8 +12,8 @@ namespace JobsFrankfurt\Listener;
 
 use Auth\Listener\Events\AuthEvent;
 use JobsFrankfurt\Entity\UserProduct;
-use Zend\EventManager\EventManager;
-use Zend\Mvc\MvcEvent;
+use Laminas\EventManager\EventManager;
+use Laminas\Mvc\MvcEvent;
 
 /**
  * ${CARET}
@@ -33,14 +33,14 @@ class UserRegisteredListener
     /**
      *
      *
-     * @var \Zend\Http\PhpEnvironment\Response
+     * @var \Laminas\Http\PhpEnvironment\Response
      */
     private $response;
 
     /**
      *
      *
-     * @var \Zend\Router\RouteStackInterface
+     * @var \Laminas\Router\RouteStackInterface
      */
     private $router;
 

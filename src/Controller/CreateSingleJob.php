@@ -10,10 +10,10 @@
 /** */
 namespace JobsFrankfurt\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Session\Container;
-use Zend\View\Helper\ServerUrl;
-use Zend\View\Model\JsonModel;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Session\Container;
+use Laminas\View\Helper\ServerUrl;
+use Laminas\View\Model\JsonModel;
 
 /**
  * ${CARET}
@@ -36,7 +36,7 @@ class CreateSingleJob extends AbstractActionController
 
     public function indexAction()
     {
-        /* @var \Zend\Http\PhpEnvironment\Request $request */
+        /* @var \Laminas\Http\PhpEnvironment\Request $request */
         $request = $this->getRequest();
 
         if ($request->isPost()) {

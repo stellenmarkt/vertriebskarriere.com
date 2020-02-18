@@ -11,7 +11,7 @@
 namespace JobsFrankfurt\Mail;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Factory creates a HTML Template Mail for sending single job pending notice to customer

@@ -11,10 +11,10 @@
 namespace JobsFrankfurt\WordpressApi\Service;
 
 use JobsFrankfurt\WordpressApi\Service\Plugin;
-use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\Exception;
-use Zend\ServiceManager\Exception\RuntimeException;
-use Zend\ServiceManager\Factory\InvokableFactory;
+use Laminas\ServiceManager\AbstractPluginManager;
+use Laminas\ServiceManager\Exception;
+use Laminas\ServiceManager\Exception\RuntimeException;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 
 /**
  * ${CARET}

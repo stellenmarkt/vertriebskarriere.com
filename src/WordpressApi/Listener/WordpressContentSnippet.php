@@ -12,7 +12,7 @@ namespace JobsFrankfurt\WordpressApi\Listener;
 
 use JobsFrankfurt\WordpressApi\Filter\PageIdMap;
 use JobsFrankfurt\WordpressApi\Service\WordpressClient;
-use Zend\EventManager\EventInterface;
+use Laminas\EventManager\EventInterface;
 
 /**
  * ${CARET}

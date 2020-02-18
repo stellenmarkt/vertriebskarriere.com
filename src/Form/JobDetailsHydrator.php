@@ -12,7 +12,7 @@ namespace JobsFrankfurt\Form;
 
 use JobsFrankfurt\Entity\Template;
 use JobsFrankfurt\Entity\TemplateImage;
-use Zend\Hydrator\HydratorInterface;
+use Laminas\Hydrator\HydratorInterface;
 
 /**
  * ${CARET}

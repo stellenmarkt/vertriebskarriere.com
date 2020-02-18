@@ -12,8 +12,8 @@ namespace JobsFrankfurt\WordpressApi\View\Helper;
 
 use JobsFrankfurt\WordpressApi\Filter\PageIdMap;
 use JobsFrankfurt\WordpressApi\Service\WordpressClient;
-use Zend\Stdlib\ArrayUtils;
-use Zend\View\Helper\AbstractHelper;
+use Laminas\Stdlib\ArrayUtils;
+use Laminas\View\Helper\AbstractHelper;
 
 /**
  * ${CARET}

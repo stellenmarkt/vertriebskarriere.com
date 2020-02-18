@@ -10,7 +10,7 @@
 namespace JobsFrankfurt\ContactForm;
 
 use JobsFrankfurt\ContactForm\View\Helper\SetSubject;
-use Zend\ServiceManager\Factory\InvokableFactory;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 
 $options = [
     // defaults to $config['core_options']['system_message_email']

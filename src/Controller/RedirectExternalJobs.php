@@ -13,9 +13,9 @@ namespace JobsFrankfurt\Controller;
 use Core\Entity\Exception\NotFoundException;
 use JobsFrankfurt\Options\CompanyTemplatesMap;
 use JobsFrankfurt\Session\VisitedJobsContainer;
-use Zend\Http\PhpEnvironment\Response;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
+use Laminas\Http\PhpEnvironment\Response;
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\View\Model\ViewModel;
 
 /**
  * ${CARET}

@@ -13,7 +13,7 @@ namespace JobsFrankfurt\Listener;
 use Core\Listener\Events\AjaxEvent;
 use Doctrine\ODM\MongoDB\DocumentRepository;
 use JobsFrankfurt\Form\JobDetailsForm;
-use Zend\Stdlib\ArrayUtils;
+use Laminas\Stdlib\ArrayUtils;
 
 /**
  * ${CARET}

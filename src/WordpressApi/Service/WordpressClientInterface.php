@@ -10,7 +10,7 @@
 /** */
 namespace JobsFrankfurt\WordpressApi\Service;
 
-use Zend\Http\Request;
+use Laminas\Http\Request;
 
 /**
  * ${CARET}

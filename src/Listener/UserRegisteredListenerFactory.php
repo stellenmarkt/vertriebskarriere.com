@@ -11,7 +11,7 @@
 namespace JobsFrankfurt\Listener;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Factory for \Gastro24\Listener\UserRegisteredListener
@@ -24,8 +24,8 @@ class UserRegisteredListenerFactory implements FactoryInterface
     
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        /* @var \Zend\Http\PhpEnvironment\Request $request
-         * @var \Zend\Mvc\MvcEvent $event */
+        /* @var \Laminas\Http\PhpEnvironment\Request $request
+         * @var \Laminas\Mvc\MvcEvent $event */
         $application = $container->get('Application');
         $request     = $application->getRequest();
         $type        = $request->getPost('pt');

@@ -11,7 +11,7 @@
 namespace JobsFrankfurt\WordpressApi\Service\Plugin;
 
 use JobsFrankfurt\WordpressApi\Service\WordpressClientInterface;
-use Zend\Http\Request;
+use Laminas\Http\Request;
 
 /**
  * ${CARET}

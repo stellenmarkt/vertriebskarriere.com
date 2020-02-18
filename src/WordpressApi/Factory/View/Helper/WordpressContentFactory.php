@@ -14,7 +14,7 @@ use JobsFrankfurt\WordpressApi\Filter\PageIdMap;
 use JobsFrankfurt\WordpressApi\Service\WordpressClient;
 use JobsFrankfurt\WordpressApi\View\Helper\WordpressContent;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
  * ${CARET}

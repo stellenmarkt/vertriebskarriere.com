@@ -57,7 +57,7 @@ class ClassificationsHydrator extends YkClassificationsHydrator
     
     /**
      * {@inheritDoc}
-     * @see \Zend\Hydrator\HydrationInterface::hydrate()
+     * @see \Laminas\Hydrator\HydrationInterface::hydrate()
      */
     public function hydrate(array $data, $classifications)
     {

@@ -12,7 +12,7 @@ namespace JobsFrankfurt\ContactForm\Controller\Plugin;
 
 use Core\Mail\MailService;
 use JobsFrankfurt\ContactForm\Options\ContactFormOptions;
-use Zend\Mvc\Controller\Plugin\AbstractPlugin;
+use Laminas\Mvc\Controller\Plugin\AbstractPlugin;
 
 /**
  * ${CARET}
@@ -50,7 +50,7 @@ class ContactMailSender extends AbstractPlugin
         $mail->setTemplate('contactform.mail');
         $mail->setTo($this->options->getEmail());
 
-        /* Due to how mail is assembled in \Zend\Mail\Transport\Sendmail,
+        /* Due to how mail is assembled in \Laminas\Mail\Transport\Sendmail,
          * we need to force the rendering of the mail in order to
          * make the subject kind of persist.
          *

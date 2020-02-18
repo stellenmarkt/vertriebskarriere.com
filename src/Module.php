@@ -5,9 +5,9 @@ namespace JobsFrankfurt;
 use Yawik\Composer\AssetProviderInterface;
 use Core\ModuleManager\ModuleConfigLoader;
 use JobsFrankfurt\Options\Landingpages;
-use Zend\Console\Console;
-use Zend\Mvc\MvcEvent;
-use Zend\Stdlib\Parameters;
+use Laminas\Console\Console;
+use Laminas\Mvc\MvcEvent;
+use Laminas\Stdlib\Parameters;
 
 /**
  * Bootstrap class of our demo skin
@@ -39,7 +39,7 @@ class Module implements AssetProviderInterface
     {
 
         return array(
-            'Zend\Loader\StandardAutoloader' => array(
+            'Laminas\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
                     __NAMESPACE__ => __DIR__ . '/../src',
                 ),

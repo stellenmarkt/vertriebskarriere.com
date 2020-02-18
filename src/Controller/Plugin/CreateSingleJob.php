@@ -20,7 +20,7 @@ use Orders\Entity\InvoiceAddress;
 use Orders\Entity\OrderInterface;
 use Orders\Entity\Product;
 use Orders\Entity\Snapshot\Job\Builder;
-use Zend\Mvc\Controller\Plugin\AbstractPlugin;
+use Laminas\Mvc\Controller\Plugin\AbstractPlugin;
 
 /**
  * ${CARET}

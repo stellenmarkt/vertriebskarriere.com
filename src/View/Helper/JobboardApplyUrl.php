@@ -11,7 +11,7 @@
 namespace JobsFrankfurt\View\Helper;
 
 use Jobs\Entity\JobInterface;
-use Zend\View\Helper\AbstractHelper;
+use Laminas\View\Helper\AbstractHelper;
 
 /**
  * ${CARET}

@@ -11,7 +11,7 @@
 namespace JobsFrankfurt\Options;
 
 use Organizations\Entity\Organization;
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 /**
  * ${CARET}
