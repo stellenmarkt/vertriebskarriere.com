@@ -23,7 +23,6 @@
         "yawik/core": "^0.34",
         "yawik/jobs": "^0.34",
         "yawik/orders": "^0.3",
-        "yawik/simple-import": "^0.7",
         "yawik/jobs-by-mail": "^0.2",
         "yawik/solr": "^0.9",
         "yawik/organizations": "^0.34",

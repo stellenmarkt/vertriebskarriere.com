@@ -5,7 +5,6 @@ use JobsFrankfurt\Form\JobDetailsHydrator;
 use JobsFrankfurt\Form\JobDetailsHydratorFactory;
 use JobsFrankfurt\Options\Landingpages;
 use Jobs\Listener\Events\JobEvent;
-use SimpleImport\Entity\Crawler;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 Module::$isLoaded = true;
@@ -116,12 +115,6 @@ return [
         'factories' => [
             JobDetailsHydrator::class => JobDetailsHydratorFactory::class,
         ],
-    ],
-
-    'simple_import_crawler_processor_manager' => [
-        'factories' => [
-            Crawler::TYPE_JOB => SimpleImport\JobProcessorFactory::class
-        ]
     ],
 
     'view_helpers' => [
