@@ -1,9 +1,9 @@
 # Vertriebskarriere.de
 
 
-## Intruduction
+## Introduction
 
-This is the Yawik Skin used at vertriebskarriere.com-. This module uses Wordpress for content on the landing pages. Also
+This is the Yawik Skin used at https://www.vertriebskarriere.com. This module uses Wordpress for content on the landing pages. Also
 otherwise many things are hard coded.
 
 
@@ -11,7 +11,7 @@ otherwise many things are hard coded.
 
 
 ```bash
-git clone git@gitlab.cross-solution.de:yawik-modules/vertriebskarriere.com-.git
-cd vertriebskarriere.com-/
+git clone git@gitlab.cross-solution.de:yawik-modules/vertriebskarriere.com.git
+cd vertriebskarriere.com/
 composer install
 ```
