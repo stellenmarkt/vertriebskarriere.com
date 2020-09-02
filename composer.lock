@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e12f07c459162ef368c5fe36fdf9f5c0",
+    "content-hash": "3117f00343a24677090998dea2c4405a",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -3545,16 +3545,16 @@
         },
         {
             "name": "laminas/laminas-modulemanager",
-            "version": "2.10.0",
+            "version": "2.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-modulemanager.git",
-                "reference": "d3bd00f46df22c3e3710f3c822f19864e00c9f9b"
+                "reference": "637aaaf2c85d13694b096e253e5884653f93bb92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-modulemanager/zipball/d3bd00f46df22c3e3710f3c822f19864e00c9f9b",
-                "reference": "d3bd00f46df22c3e3710f3c822f19864e00c9f9b",
+                "url": "https://api.github.com/repos/laminas/laminas-modulemanager/zipball/637aaaf2c85d13694b096e253e5884653f93bb92",
+                "reference": "637aaaf2c85d13694b096e253e5884653f93bb92",
                 "shasum": ""
             },
             "require": {
@@ -3585,12 +3585,6 @@
                 "laminas/laminas-servicemanager": "Laminas\\ServiceManager component"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.10.x-dev",
-                    "dev-develop": "2.11.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Laminas\\ModuleManager\\": "src/"
@@ -3612,7 +3606,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2020-08-25T13:33:28+00:00"
+            "time": "2020-09-01T22:26:46+00:00"
         },
         {
             "name": "laminas/laminas-mvc",
@@ -5343,16 +5337,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.9.0",
+            "version": "v4.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "aaee038b912e567780949787d5fe1977be11a778"
+                "reference": "88e519766fc58bd46b8265561fb79b54e2e00b28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/aaee038b912e567780949787d5fe1977be11a778",
-                "reference": "aaee038b912e567780949787d5fe1977be11a778",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/88e519766fc58bd46b8265561fb79b54e2e00b28",
+                "reference": "88e519766fc58bd46b8265561fb79b54e2e00b28",
                 "shasum": ""
             },
             "require": {
@@ -5391,7 +5385,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2020-08-18T19:48:01+00:00"
+            "time": "2020-08-30T16:15:20+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -6634,16 +6628,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v4.4.11",
+            "version": "v4.4.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "55d07021da933dd0d633ffdab6f45d5b230c7e02"
+                "reference": "b39fd99b9297b67fb7633b7d8083957a97e1e727"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/55d07021da933dd0d633ffdab6f45d5b230c7e02",
-                "reference": "55d07021da933dd0d633ffdab6f45d5b230c7e02",
+                "url": "https://api.github.com/repos/symfony/console/zipball/b39fd99b9297b67fb7633b7d8083957a97e1e727",
+                "reference": "b39fd99b9297b67fb7633b7d8083957a97e1e727",
                 "shasum": ""
             },
             "require": {
@@ -6721,7 +6715,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-07-06T13:18:39+00:00"
+            "time": "2020-09-02T07:07:21+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -6789,7 +6783,7 @@
         },
         {
             "name": "symfony/dotenv",
-            "version": "v4.4.11",
+            "version": "v4.4.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dotenv.git",
@@ -6860,16 +6854,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v4.4.11",
+            "version": "v4.4.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "b27f491309db5757816db672b256ea2e03677d30"
+                "reference": "27575bcbc68db1f6d06218891296572c9b845704"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/b27f491309db5757816db672b256ea2e03677d30",
-                "reference": "b27f491309db5757816db672b256ea2e03677d30",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/27575bcbc68db1f6d06218891296572c9b845704",
+                "reference": "27575bcbc68db1f6d06218891296572c9b845704",
                 "shasum": ""
             },
             "require": {
@@ -6920,20 +6914,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-05-30T18:50:54+00:00"
+            "time": "2020-08-21T17:19:37+00:00"
         },
         {
             "name": "symfony/finder",
-            "version": "v4.4.11",
+            "version": "v4.4.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "2727aa35fddfada1dd37599948528e9b152eb742"
+                "reference": "2a78590b2c7e3de5c429628457c47541c58db9c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/2727aa35fddfada1dd37599948528e9b152eb742",
-                "reference": "2727aa35fddfada1dd37599948528e9b152eb742",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/2a78590b2c7e3de5c429628457c47541c58db9c7",
+                "reference": "2a78590b2c7e3de5c429628457c47541c58db9c7",
                 "shasum": ""
             },
             "require": {
@@ -6983,11 +6977,11 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-07-05T09:39:30+00:00"
+            "time": "2020-08-17T09:56:45+00:00"
         },
         {
             "name": "symfony/options-resolver",
-            "version": "v5.1.3",
+            "version": "v5.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/options-resolver.git",
@@ -7759,7 +7753,7 @@
         },
         {
             "name": "symfony/process",
-            "version": "v4.4.11",
+            "version": "v4.4.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
@@ -8551,16 +8545,16 @@
         },
         {
             "name": "yawik/jobs-by-mail",
-            "version": "v0.2.2",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yawik/JobsByMail.git",
-                "reference": "dd8b002997541c2f1395d59f51a005ea8798e00a"
+                "reference": "3d2d4301e1523b09c4b15d5626935e9f26e8ad5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yawik/JobsByMail/zipball/dd8b002997541c2f1395d59f51a005ea8798e00a",
-                "reference": "dd8b002997541c2f1395d59f51a005ea8798e00a",
+                "url": "https://api.github.com/repos/yawik/JobsByMail/zipball/3d2d4301e1523b09c4b15d5626935e9f26e8ad5b",
+                "reference": "3d2d4301e1523b09c4b15d5626935e9f26e8ad5b",
                 "shasum": ""
             },
             "require": {
@@ -8599,16 +8593,16 @@
             ],
             "authors": [
                 {
-                    "name": "Anthonius Munthi",
-                    "email": "me@itstoni.com"
+                    "name": "Carsten Bleek",
+                    "email": "bleek@cross-solution.de"
                 },
                 {
                     "name": "Mathias Gelhausen",
                     "email": "gelhausen@cross-solution.de"
                 },
                 {
-                    "name": "Carsten Bleek",
-                    "email": "bleek@cross-solution.de"
+                    "name": "Anthonius Munthi",
+                    "email": "me@itstoni.com"
                 }
             ],
             "description": "This module enables subscription to latest jobs by email",
@@ -8616,33 +8610,34 @@
                 "jobs",
                 "yawik"
             ],
-            "time": "2019-03-22T10:26:50+00:00"
+            "time": "2019-03-22T09:26:00+00:00"
         },
         {
             "name": "yawik/orders",
-            "version": "v0.3.2",
+            "version": "v0.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yawik/Orders.git",
-                "reference": "75464c8372030c74cca149dc8a2ef8909ea1a021"
+                "reference": "1ef278ffd26e8cf45040a44b8fc6c9bc8f586b98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yawik/Orders/zipball/75464c8372030c74cca149dc8a2ef8909ea1a021",
-                "reference": "75464c8372030c74cca149dc8a2ef8909ea1a021",
+                "url": "https://api.github.com/repos/yawik/Orders/zipball/1ef278ffd26e8cf45040a44b8fc6c9bc8f586b98",
+                "reference": "1ef278ffd26e8cf45040a44b8fc6c9bc8f586b98",
                 "shasum": ""
             },
             "require": {
-                "yawik/applications": ">=0.32",
-                "yawik/auth": ">=0.32",
-                "yawik/composer-plugin": ">=0.32",
-                "yawik/core": ">=0.32",
-                "yawik/cv": ">=0.32",
-                "yawik/jobs": ">=0.32",
-                "yawik/settings": ">=0.32"
+                "laminas/laminas-dependency-plugin": "^1.0",
+                "yawik/applications": "^0.34",
+                "yawik/auth": "^0.34",
+                "yawik/core": "^0.34",
+                "yawik/cv": "^0.34",
+                "yawik/jobs": "^0.34",
+                "yawik/settings": "^0.34"
             },
             "require-dev": {
-                "phpunit/phpunit": "^5.7",
+                "cross-solution/phpunit-utils": "^2.0",
+                "phpunit/phpunit": "^8.2.3",
                 "yawik/behat": "~0.32@dev"
             },
             "type": "yawik-module",
@@ -8665,16 +8660,16 @@
             ],
             "authors": [
                 {
-                    "name": "Anthonius Munthi",
-                    "email": "me@itstoni.com"
+                    "name": "Carsten Bleek",
+                    "email": "bleek@cross-solution.de"
                 },
                 {
                     "name": "Mathias Gelhausen",
                     "email": "gelhausen@cross-solution.de"
                 },
                 {
-                    "name": "Carsten Bleek",
-                    "email": "bleek@cross-solution.de"
+                    "name": "Anthonius Munthi",
+                    "email": "me@itstoni.com"
                 }
             ],
             "description": "This module adds a billing address to the job posting entering wizard .",
@@ -8682,7 +8677,7 @@
                 "billing",
                 "yawik"
             ],
-            "time": "2019-03-29T12:56:31+00:00"
+            "time": "2020-06-12T16:38:32+00:00"
         },
         {
             "name": "yawik/organizations",
