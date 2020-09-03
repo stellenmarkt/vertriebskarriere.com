@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3117f00343a24677090998dea2c4405a",
+    "content-hash": "14799998bb60df2ff838558a3af6f7a6",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -8798,16 +8798,16 @@
         },
         {
             "name": "yawik/sentry",
-            "version": "v0.0.1",
+            "version": "0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yawik/sentry.git",
-                "reference": "787acb509efd936af8ad7e4d1bcf7b26870e3f27"
+                "reference": "1c0c9f8ca658462786f41ebca60abe3fa2d62b73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yawik/sentry/zipball/787acb509efd936af8ad7e4d1bcf7b26870e3f27",
-                "reference": "787acb509efd936af8ad7e4d1bcf7b26870e3f27",
+                "url": "https://api.github.com/repos/yawik/sentry/zipball/1c0c9f8ca658462786f41ebca60abe3fa2d62b73",
+                "reference": "1c0c9f8ca658462786f41ebca60abe3fa2d62b73",
                 "shasum": ""
             },
             "require": {
@@ -8862,7 +8862,7 @@
                 "sentry",
                 "yawik"
             ],
-            "time": "2020-08-27T16:34:07+00:00"
+            "time": "2020-09-02T09:16:04+00:00"
         },
         {
             "name": "yawik/settings",
