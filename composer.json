@@ -24,10 +24,10 @@
         "yawik/jobs": "^0.34",
         "yawik/orders": "^0.4",
         "yawik/jobs-by-mail": "^0.3",
-        "yawik/solr": "^0.9",
+        "yawik/solr": "^1.0",
         "yawik/organizations": "^0.34",
         "yawik/pdf": "^0.34",
-        "yawik/composer-plugin": "^1.0",
+        "yawik/composer-plugin": "^2.0",
         "laminas/laminas-dependency-plugin": "^1.0",
         "yawik/sentry": "^0.1"
     },
