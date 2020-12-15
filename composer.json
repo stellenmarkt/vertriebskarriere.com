@@ -15,21 +15,21 @@
     ],
     "keywords": [
         "yawik",
-        "skin"
+        "skin",
+        "rekruiting"
     ],
     "prefer-stable": true,
     "minimum-stability": "dev",
     "require": {
-        "yawik/core": "^0.34",
-        "yawik/jobs": "^0.34",
-        "yawik/orders": "^0.4",
+        "yawik/core": "^0.35",
+        "yawik/jobs": "^0.35",
+        "yawik/orders": "^0.5",
         "yawik/jobs-by-mail": "^0.3",
-        "yawik/solr": "^1.0",
-        "yawik/organizations": "^0.34",
-        "yawik/pdf": "^0.34",
-        "yawik/composer-plugin": "^2.0",
-        "laminas/laminas-dependency-plugin": "^1.0",
-        "yawik/sentry": "^0.1"
+        "yawik/solr": "^2.0",
+        "yawik/organizations": "^0.35",
+        "yawik/pdf": "^0.35",
+        "yawik/composer-plugin": "^3.0",
+        "yawik/sentry": "^0.2"
     },
     "autoload": {
         "psr-4": {
@@ -51,7 +51,7 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
-        "serve": "APPLICATION_ENV=development php -S localhost:8000 -t test/sandbox/public",
+        "serve": "APPLICATION_ENV=development php -S 0.0.0.0:8000 -t test/sandbox/public test/sandbox/public/router.php",
         "start-selenium": "./vendor/bin/selenium-server-standalone -p 4444 -Dwebdriver.chrome.driver=./vendor/bin/chromedriver",
         "test": "phpunit"
     },
